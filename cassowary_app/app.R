@@ -5,8 +5,8 @@ library(tidyverse)
 library(galah)
 
 # data
-cassowary <- read_csv("../data/cassowaries.csv")
-fruit <- read_csv("../data/fruit.csv")
+cassowary <- read_csv("../data/cassowaries.csv", show_col_types = FALSE)
+fruit <- read_csv("../data/fruit.csv", show_col_types = FALSE)
 
 # Define UI
 ui <- fluidPage(
@@ -17,7 +17,7 @@ ui <- fluidPage(
     ),
     column(width = 6,
            checkboxGroupInput("plant_select", "Select Plants:",
-                              choiceNames = paste(unique(fruit$species), "(", unique(fruit$vernacularName), ")", sep = ""),
+                              choiceNames = paste(unique(fruit$species), " (", unique(fruit$vernacularName), ")", sep = ""),
                               choiceValues = unique(fruit$species),
                               width = "100%")
     )
@@ -35,7 +35,8 @@ server <- function(input, output, session) {
                        lng = ~decimalLongitude,
                        lat = ~decimalLatitude,
                        radius = 4,
-                       color = "blue")
+                       color = "blue",
+                       group = "cassowary")
 
   })
   
@@ -46,12 +47,13 @@ server <- function(input, output, session) {
       filter(species %in% selected_species)
     
     leafletProxy("map") |> 
-      clearMarkers() |> 
+      clearGroup("plants") |> 
       addCircleMarkers(data = selected_plants,
                        lng = ~decimalLongitude,
                        lat = ~decimalLatitude,
                        radius = 2,
-                       color = "red")
+                       color = "red",
+                       group = "plants")
   })
 }
 
