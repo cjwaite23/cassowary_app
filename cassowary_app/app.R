@@ -25,13 +25,13 @@ ui <- fluidPage(
     ),
     column(width = 2,
            checkboxGroupInput("plant_select", "Select Plants:",
-                              choiceNames = paste(unique(fruit$species), " (", unique(fruit$vernacularName), ")", sep = ""),
+                              choiceNames = paste(unique(fruit$species), "(", unique(fruit$vernacularName), ")", sep = ""),
                               choiceValues = unique(fruit$species),
                               width = "100%")
     )
   )
 )
-
+  
 # Define server
 server <- function(input, output) {
   # initial map loads with cassowaries
