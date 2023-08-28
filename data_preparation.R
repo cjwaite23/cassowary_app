@@ -37,10 +37,7 @@ coastal_waters_shp <- CWA |>
 ##### Cassowary Data #####
 cassowary <- galah_call() |>
   galah_identify("Casuarius casuarius") |>
-  galah_select(group = c("basic"), cl932, cl22, cl1048, cl21,
-               el674,
-               species, subspecies,
-               year, month, day) |>
+  galah_select(group = c("basic"), species, vernacularName, year) |>
   atlas_occurrences()
 
 cassowary_data <- cassowary |>
@@ -58,6 +55,7 @@ cassowary_data <- cassowary |>
                             NA,
                             coastal_waters_shp$state_long[intersection])) |>
   select(-intersection) |>
+  st_drop_geometry() |>
   filter(cw_state == "Queensland") |>
   # only keep records above 20 degrees S
   filter(decimalLatitude > -20) |>
@@ -65,9 +63,8 @@ cassowary_data <- cassowary |>
   mutate(eventDate = if_else(dataResourceName == "iNaturalist Australia",
                              with_tz(eventDate, "Australia/Brisbane"),
                              force_tz(eventDate, "Australia/Brisbane"))) |>
-  mutate(eventTime = as_hms(eventDate)) |>
+  select(decimalLatitude, decimalLongitude, eventDate, species, vernacularName, recordID, dataResourceName)
   # Create eventDay column
-  mutate(eventDay = format(eventDate, "%d-%m"))
 write_csv(cassowary_data, file = "data/cassowaries.csv")
 
 ##### Fruit data #####
@@ -78,10 +75,7 @@ fruit_species <- c("Monoon michaelii", "Calophyllum costatum", "Corynocarpus cri
                    "Castanospora alphandii", "Faradaya splendida", "Cerbera floribunda")
 fruit <- galah_call() |>
   galah_identify(fruit_species) |>
-  galah_select(group = c("basic"), cl932, cl22, cl1048, cl21,
-               el674,
-               species, subspecies, vernacularName,
-               year, month, day) |>
+  galah_select(group = c("basic"), species, vernacularName, year) |>
   atlas_occurrences()
 
 fruit_data <- fruit |>
@@ -99,6 +93,7 @@ fruit_data <- fruit |>
                             NA,
                             coastal_waters_shp$state_long[intersection])) |>
   select(-intersection) |>
+  st_drop_geometry() |>
   filter(cw_state == "Queensland") |>
   # only keep records above 20 degrees S
   filter(decimalLatitude > -20) |>
@@ -106,7 +101,5 @@ fruit_data <- fruit |>
   mutate(eventDate = if_else(dataResourceName == "iNaturalist Australia",
                              with_tz(eventDate, "Australia/Brisbane"),
                              force_tz(eventDate, "Australia/Brisbane"))) |>
-  mutate(eventTime = as_hms(eventDate)) |>
-  # Create eventDay column
-  mutate(eventDay = format(eventDate, "%d-%m"))
+  select(decimalLatitude, decimalLongitude, eventDate, species, vernacularName, recordID, dataResourceName)
 write_csv(fruit_data, file = "data/fruit.csv")
