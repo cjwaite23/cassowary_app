@@ -11,8 +11,8 @@ plant_species <- fruit |>
   select(species, vernacularName) |>
   distinct() |>
   arrange(species) |>
-  mutate(combined_names = paste(species, 
-                                ifelse(is.na(vernacularName), 
+  mutate(combined_names = paste(species,
+                                ifelse(is.na(vernacularName),
                                        "",
                                        paste(" (", vernacularName, ")", sep = "")),
                                 sep = ""))
@@ -26,7 +26,17 @@ ui <- fluidPage(
     ),
     column(width = 6,
            checkboxGroupInput("plant_select", "Select Plants:",
-                              choiceNames = plant_species$combined_names,
+                              choiceNames = map(plant_species$combined_names, function(name) {
+                                each_word <- str_split(name, "\\s+")[[1]]
+                                italics <- paste0(each_word[1:2], collapse = " ")
+                                if (length(each_word) == 2) {
+                                  regular <- ""
+                                } else {
+                                  regular <- paste0(each_word[3:length(each_word)], collapse = " ")
+                                }
+                                label <- paste0("<i>", italics, "</i> ", regular)
+                                HTML(label)
+                              }),
                               choiceValues = plant_species$species,
                               width = "100%")
     )
