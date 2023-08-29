@@ -7,6 +7,15 @@ library(galah)
 # data
 cassowary <- read_csv("../data/cassowaries.csv", show_col_types = FALSE)
 fruit <- read_csv("../data/fruit.csv", show_col_types = FALSE)
+plant_species <- fruit |>
+  select(species, vernacularName) |>
+  distinct() |>
+  arrange(species) |>
+  mutate(combined_names = paste(species, 
+                                ifelse(is.na(vernacularName), 
+                                       "",
+                                       paste(" (", vernacularName, ")", sep = "")),
+                                sep = ""))
 
 # Define UI
 ui <- fluidPage(
@@ -17,8 +26,8 @@ ui <- fluidPage(
     ),
     column(width = 6,
            checkboxGroupInput("plant_select", "Select Plants:",
-                              choiceNames = paste(unique(fruit$species), " (", unique(fruit$vernacularName), ")", sep = ""),
-                              choiceValues = unique(fruit$species),
+                              choiceNames = plant_species$combined_names,
+                              choiceValues = plant_species$species,
                               width = "100%")
     )
   )
