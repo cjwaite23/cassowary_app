@@ -29,14 +29,18 @@ ui <- fluidPage(
 server <- function(input, output, session) {
   output$map <- renderLeaflet({
     leaflet() |>
-      addProviderTiles(providers$Stamen.TonerBackground) |>
+      addProviderTiles(providers$CartoDB.Positron, group = "Positron") |> 
+      addProviderTiles(providers$Stamen.Toner, group = "Toner") |> 
+      addProviderTiles(providers$Stamen.Terrain, group = "Terrain") |> 
       setView(lng = 143, lat = -16, zoom = 6) |>
       addCircleMarkers(data = cassowary,
                        lng = ~decimalLongitude,
                        lat = ~decimalLatitude,
                        radius = 4,
                        color = "blue",
-                       group = "cassowary")
+                       group = "cassowary") |> 
+      addLayersControl(baseGroups = c("Positron", "Toner", "Terrain"),
+                       options = layersControlOptions(collapsed = FALSE))
 
   })
   
