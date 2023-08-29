@@ -33,7 +33,6 @@ ui <- fluidPage(
   )
 )
 
-
 # Define server
 server <- function(input, output, session) {
   output$map <- renderLeaflet({
@@ -45,13 +44,17 @@ server <- function(input, output, session) {
       addCircleMarkers(data = cassowary,
                        lng = ~decimalLongitude,
                        lat = ~decimalLatitude,
-                       radius = 4,
-                       color = "blue",
+                       radius = 3,
+                       stroke = FALSE,
+                       color = "#4B1C57",
+                       fillOpacity = 0.7,
                        group = "cassowary") |> 
       addLayersControl(baseGroups = c("Positron", "Toner", "Terrain"),
                        options = layersControlOptions(collapsed = FALSE))
 
   })
+  
+  plant_pal <- colorFactor(topo.colors(15), fruit$species)
   
   observe({
     selected_species <- input$plant_select
@@ -64,9 +67,11 @@ server <- function(input, output, session) {
       addCircleMarkers(data = selected_plants,
                        lng = ~decimalLongitude,
                        lat = ~decimalLatitude,
-                       radius = 2,
-                       color = "red",
-                       group = "plants")
+                       radius = 3,
+                       stroke = FALSE,
+                       color = ~plant_pal(species),
+                       group = "plants",
+                       popup = paste0(selected_plants$vernacularName, "<br/>", "<i>", selected_plants$species, "</i>"))
   })
 }
 
