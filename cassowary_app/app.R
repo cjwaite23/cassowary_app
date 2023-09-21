@@ -91,7 +91,7 @@ server <- function(input, output, session) {
       addCircleMarkers(data = cassowary,
                        lng = ~decimalLongitude,
                        lat = ~decimalLatitude,
-                       radius = 3,
+                       radius = 6,
                        stroke = FALSE,
                        color = "#4B1C57",
                        fillOpacity = 0.7,
@@ -115,9 +115,10 @@ server <- function(input, output, session) {
       addCircleMarkers(data = selected_plants,
                        lng = ~decimalLongitude,
                        lat = ~decimalLatitude,
-                       radius = 3,
+                       radius = 6,
                        stroke = FALSE,
                        color = ~plant_pal[species] |> unname(),
+                       fillOpacity = 0.8,
                        group = "plants",
                        popup = paste0(selected_plants$vernacularName, "<br/>", "<i>", selected_plants$species, "</i>"))
   })
