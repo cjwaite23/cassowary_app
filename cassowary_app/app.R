@@ -5,6 +5,7 @@ library(fontawesome)
 library(leaflet)
 library(tidyverse)
 library(htmltools)
+library(shinyjs)
 
 # data
 cassowary <- read_csv("../data/cassowaries.csv", show_col_types = FALSE)
@@ -30,6 +31,7 @@ checkbox_names <- map(
 # Define UI
 ui <- fluidPage(
   setBackgroundImage(src = "cassowary.jpg"),
+  #setBackgroundColor(color = "#505050"),
   ## custom CSS for 3 column layout (used below for mechanics filter options)
   tags$head(
     tags$style(HTML("
@@ -37,27 +39,44 @@ ui <- fluidPage(
        -webkit-column-count: 3; /* Chrome, Safari, Opera */
        -moz-column-count: 3; /* Firefox */
        column-count: 3;
-     }"
+     }
+     .styled-checkbox label {
+          display: flex;
+          padding: 2px 2px 2px 24px;
+          margin: 5px;
+          background-color: #f4f4f4;
+          border: 1px solid #ccc;
+          border-radius: 0px;
+          cursor: pointer;
+          align-items: center;
+          text-align: center;
+          transition: background-color 0.3s;
+      }
+      .styled-checkbox input[type='checkbox'] {
+          align_items: center;
+      }"
     ))
   ),
-  titlePanel("World Cassowary Day 2023"),
+  titlePanel(titlePanel(div("World Cassowary Day 2023", style = "color: #EEEEEE"))),
   fluidRow(
     column(width = 5,
            leafletOutput("map", height = "80vh")
     ),
-    div(fa_html_dependency(),
-        wellPanel(
-          tags$div(
-            class = "multicol",
+    column(
+      width = 5,
+      div(fa_html_dependency(),
+          div(
+            class = "multicol styled-checkbox",
             checkboxGroupInput("plant_select",
-                               "Select Plants:",
+                               NULL,
                                choiceNames = map(.x = plant_species$checkbox_label, .f = HTML),
                                choiceValues = plant_species$species,
                                width = "100%")
           )
+
         )
+      )
     )
-  )
 )
 
 # Define server
@@ -83,7 +102,7 @@ server <- function(input, output, session) {
   })
 
   # Colour palette
-  plant_pal <- colorFactor(topo.colors(15), fruit$species)
+  plant_pal <- plant_species$colour |> setNames(plant_species$species)
 
   observe({
     selected_species <- input$plant_select
@@ -98,60 +117,10 @@ server <- function(input, output, session) {
                        lat = ~decimalLatitude,
                        radius = 3,
                        stroke = FALSE,
-                       color = ~plant_pal(species),
+                       color = ~plant_pal[species] |> unname(),
                        group = "plants",
                        popup = paste0(selected_plants$vernacularName, "<br/>", "<i>", selected_plants$species, "</i>"))
   })
 }
 
 shinyApp(ui, server)
-
-# library(shiny)
-# 
-# # Define a list of colors and corresponding labels
-# color_data <- list(
-#   "Red" = "#FF5733",
-#   "Green" = "#33FF57",
-#   "Blue" = "#3366FF",
-#   "Yellow" = "#FFFF33",
-#   "Orange" = "#FFA500",
-#   "Purple" = "#800080",
-#   "Pink" = "#FF69B4",
-#   "Cyan" = "#00FFFF",
-#   "Magenta" = "#FF00FF",
-#   "Lime" = "#00FF00",
-#   "Teal" = "#008080",
-#   "Brown" = "#A52A2A",
-#   "Maroon" = "#800000",
-#   "Navy" = "#000080",
-#   "Gray" = "#808080"  # Add more hex color codes as needed
-# )
-# 
-# ui <- fluidPage(
-#   titlePanel("FontAwesome Circles in Checkbox Group"),
-#   sidebarLayout(
-#     sidebarPanel(
-#       div(fa_html_dependency(),
-#       uiOutput("color_labels")  # Dynamic UI for colored circle labels
-#     )),
-#     mainPanel(
-#       # Place the output here
-#     )
-#   )
-# )
-# 
-# server <- function(input, output) {
-#   output$color_labels <- renderUI({
-#     # Generate the HTML for the checkbox labels with FontAwesome circles
-#     labels <- lapply(names(color_data), function(color) {
-#       circle_html <- sprintf("<i class='fa fa-circle' style='color: %s; margin-right: 5px;'></i>", color_data[[color]])
-#       checkbox_label <- paste0(circle_html, color)
-#       checkboxInput(paste0("color_", color), HTML(checkbox_label), value = FALSE)
-#     })
-#     tagList(labels)  # Return a list of checkbox labels
-#   })
-# }
-# 
-# shinyApp(ui, server)
-
-

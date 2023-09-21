@@ -152,16 +152,34 @@ fruit_links <- c(
   "https://apps.lucidcentral.org/rainforest/text/entities/syzygium_divaricatum.htm"
 )
 
+colours <- c(
+  "#125A56",
+  "#00767B",
+  "#238F9D",
+  "#42A7C6",
+  "#60BCE9",
+  "#9DCCEF",
+  "#C6DBED",
+  "#F0E6B2",
+  "#F9D576",
+  "#FFB954",
+  "#FD9A44",
+  "#F57634",
+  "#E94C1F",
+  "#D11807",
+  "#A01813"
+)
+
 plant_species <- tibble(
   species = fruit_species,
   vernacularName = fruit_vernacularNames,
   link = fruit_links,
 ) |>
   mutate(combined_names = paste(species, " (", vernacularName, ")", sep = ""),
-         colour = plant_pal(species)) |>
+         colour = colours) |>
   #mutate(checkbox_label = paste0("<div style='display:flex'><i class='fas fa-circle' style='color:", colour,";margin-top:3px;'</i><div style='color:black;padding-left:5px;'>", combined_names, "</div></div>"))
   #mutate(checkbox_label = span(icon("circle", class = paste0("'color:", colour, ";'")), combined_names))
   mutate(checkbox_label = paste0(sprintf("<i class='fa fa-circle' style='color: %s; margin-right: 5px;'></i>", colour),
-                                 "<i>",species, "</i> (", vernacularName, ")</span>",
-                                 sprintf("<img src='%s' style='max-width: 50px; max-height: 50px;' />", paste0("../images/", species, ".jpg"))))
+                                 "<i>",species, "</i><br>(", vernacularName, ")</span><br>",
+                                 sprintf("<img src='%s' style='max-width: 150px; max-height: 120px;' />", paste0(species, ".jpg"))))
 write_csv(plant_species, file = "data/plant_species.csv")
