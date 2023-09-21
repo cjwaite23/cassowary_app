@@ -9,7 +9,7 @@
   library(sf)
   library(sfheaders)
   library(tidyverse)
-  library(mapdeck)
+  library(leaflet)
   library(ggrepel)
 }
 
@@ -64,15 +64,26 @@ cassowary_data <- cassowary |>
                              with_tz(eventDate, "Australia/Brisbane"),
                              force_tz(eventDate, "Australia/Brisbane"))) |>
   select(decimalLatitude, decimalLongitude, eventDate, species, vernacularName, recordID, dataResourceName)
-  # Create eventDay column
 write_csv(cassowary_data, file = "data/cassowaries.csv")
 
 ##### Fruit data #####
-fruit_species <- c("Monoon michaelii", "Calophyllum costatum", "Corynocarpus cribbianus", 
-                   "Elaeocarpus stellaris", "Beilschmiedia oligandra", "Beilschmiedia volckii", 
-                   "Cryptocarya oblata", "Cryptocarya pleurosperma", "Endiandra montana", 
-                   "Endiandra sankeyana", "Syzygium divaricatum", "Syzygium cormiflorum", 
-                   "Castanospora alphandii", "Faradaya splendida", "Cerbera floribunda")
+fruit_species <- c(
+  "Beilschmiedia oligandra",
+  "Beilschmiedia volckii",
+  "Calophyllum costatum",
+  "Castanospora alphandii",
+  "Cerbera floribunda",
+  "Corynocarpus cribbianus",
+  "Cryptocarya oblata",
+  "Cryptocarya pleurosperma",
+  "Elaeocarpus stellaris",
+  "Endiandra montana",
+  "Endiandra sankeyana",
+  "Faradaya splendida",
+  "Monoon michaelii",
+  "Syzygium cormiflorum",
+  "Syzygium divaricatum")
+
 fruit <- galah_call() |>
   galah_identify(fruit_species) |>
   galah_select(group = c("basic"), species, vernacularName, year) |>
@@ -103,3 +114,54 @@ fruit_data <- fruit |>
                              force_tz(eventDate, "Australia/Brisbane"))) |>
   select(decimalLatitude, decimalLongitude, eventDate, species, vernacularName, recordID, dataResourceName)
 write_csv(fruit_data, file = "data/fruit.csv")
+
+##### Fruit Name data + links #####
+fruit_vernacularNames <- c(
+  "Dogwood",
+  "Blush Walnut",
+  "Red Touriga",
+  "Brown Tamarind",
+  "Cassowary Plum",
+  "Cribwood",
+  "Bolly Silkwood",
+  "Poison Laurel",
+  "Quandong",
+  "Brown Walnut",
+  "Sankey's Walnut",
+  "Glory Vine",
+  "Canary Beech",
+  "Watergum",
+  "Cassowary Satinash"
+)
+
+fruit_links <- c(
+  "https://apps.lucidcentral.org/rainforest/text/entities/beilschmiedia_oligandra.htm",
+  "https://apps.lucidcentral.org/rainforest/text/entities/beilschmiedia_volckii.htm",
+  "https://apps.lucidcentral.org/rainforest/text/entities/calophyllum_costatum.htm",
+  "https://apps.lucidcentral.org/rainforest/text/entities/castanospora_alphandii.htm",
+  "https://apps.lucidcentral.org/rainforest/text/entities/cerbera_floribunda.htm",
+  "https://apps.lucidcentral.org/rainforest/text/entities/corynocarpus_cribbianus.htm",
+  "https://apps.lucidcentral.org/rainforest/text/entities/cryptocarya_oblata.htm",
+  "https://apps.lucidcentral.org/rainforest/text/entities/cryptocarya_pleurosperma.htm",
+  "https://apps.lucidcentral.org/rainforest/text/entities/elaeocarpus_stellaris.htm",
+  "https://apps.lucidcentral.org/rainforest/text/entities/endiandra_montana.htm",
+  "https://apps.lucidcentral.org/rainforest/text/entities/endiandra_sankeyana.htm",
+  "https://apps.lucidcentral.org/rainforest/text/entities/oxera_splendida.htm",
+  "https://apps.lucidcentral.org/rainforest/text/entities/monoon_michaelii.htm",
+  "https://apps.lucidcentral.org/rainforest/text/entities/syzygium_cormiflorum.htm",
+  "https://apps.lucidcentral.org/rainforest/text/entities/syzygium_divaricatum.htm"
+)
+
+plant_species <- tibble(
+  species = fruit_species,
+  vernacularName = fruit_vernacularNames,
+  link = fruit_links,
+) |>
+  mutate(combined_names = paste(species, " (", vernacularName, ")", sep = ""),
+         colour = plant_pal(species)) |>
+  #mutate(checkbox_label = paste0("<div style='display:flex'><i class='fas fa-circle' style='color:", colour,";margin-top:3px;'</i><div style='color:black;padding-left:5px;'>", combined_names, "</div></div>"))
+  #mutate(checkbox_label = span(icon("circle", class = paste0("'color:", colour, ";'")), combined_names))
+  mutate(checkbox_label = paste0(sprintf("<i class='fa fa-circle' style='color: %s; margin-right: 5px;'></i>", colour),
+                                 "<i>",species, "</i> (", vernacularName, ")</span>",
+                                 sprintf("<img src='%s' style='max-width: 50px; max-height: 50px;' />", paste0("../images/", species, ".jpg"))))
+write_csv(plant_species, file = "data/plant_species.csv")

@@ -1,56 +1,72 @@
 
 library(shiny)
+library(fontawesome)
 library(leaflet)
 library(tidyverse)
-library(galah)
+library(htmltools)
 
 # data
 cassowary <- read_csv("../data/cassowaries.csv", show_col_types = FALSE)
 fruit <- read_csv("../data/fruit.csv", show_col_types = FALSE)
-plant_species <- fruit |>
-  select(species, vernacularName) |>
-  distinct() |>
-  arrange(species) |>
-  mutate(combined_names = paste(species,
-                                ifelse(is.na(vernacularName),
-                                       "",
-                                       paste(" (", vernacularName, ")", sep = "")),
-                                sep = ""))
+plant_species <- read_csv("../data/plant_species.csv", show_col_types = FALSE)
+
+# checkbox names
+checkbox_names <- map(
+  plant_species$combined_names,
+  function(name) {
+    each_word <- str_split(name, "\\s+")[[1]]
+    italics <- paste0(each_word[1:2], collapse = " ")
+    if (length(each_word) == 2) {
+      regular <- ""
+    } else {
+      regular <- paste0(each_word[3:length(each_word)], collapse = " ")
+    }
+    label <- paste0("<i>", italics, "</i> ", regular)
+    HTML(label)
+  }
+)
 
 # Define UI
 ui <- fluidPage(
-  titlePanel("CASSOWARIES!!!"),
+  ## custom CSS for 3 column layout (used below for mechanics filter options)
+  tags$head(
+    tags$style(HTML("
+     .multicol {
+       -webkit-column-count: 3; /* Chrome, Safari, Opera */
+       -moz-column-count: 3; /* Firefox */
+       column-count: 3;
+     }"
+    ))
+  ),
+  titlePanel("World Cassowary Day 2023"),
   fluidRow(
-    column(width = 6,
+    column(width = 5,
            leafletOutput("map", height = "80vh")
     ),
-    column(width = 6,
-           checkboxGroupInput("plant_select", "Select Plants:",
-                              choiceNames = map(plant_species$combined_names, function(name) {
-                                each_word <- str_split(name, "\\s+")[[1]]
-                                italics <- paste0(each_word[1:2], collapse = " ")
-                                if (length(each_word) == 2) {
-                                  regular <- ""
-                                } else {
-                                  regular <- paste0(each_word[3:length(each_word)], collapse = " ")
-                                }
-                                label <- paste0("<i>", italics, "</i> ", regular)
-                                HTML(label)
-                              }),
-                              choiceValues = plant_species$species,
-                              width = "100%")
+    div(fa_html_dependency(),
+        wellPanel(
+          tags$div(
+            class = "multicol",
+            checkboxGroupInput("plant_select",
+                               "Select Plants:",
+                               choiceNames = map(.x = plant_species$checkbox_label, .f = HTML),
+                               choiceValues = plant_species$species,
+                               width = "100%")
+          )
+        )
     )
   )
 )
 
 # Define server
 server <- function(input, output, session) {
+  # Map
   output$map <- renderLeaflet({
     leaflet() |>
-      addProviderTiles(providers$CartoDB.Positron, group = "Positron") |> 
-      addProviderTiles(providers$Stamen.Toner, group = "Toner") |> 
-      addProviderTiles(providers$Stamen.Terrain, group = "Terrain") |> 
-      setView(lng = 143, lat = -16, zoom = 6) |>
+      addProviderTiles(providers$CartoDB.Positron, group = "Positron") |>
+      addProviderTiles(providers$Stamen.Toner, group = "Toner") |>
+      addProviderTiles(providers$Stamen.Terrain, group = "Terrain") |>
+      setView(lng = 143, lat = -15.3, zoom = 7) |>
       addCircleMarkers(data = cassowary,
                        lng = ~decimalLongitude,
                        lat = ~decimalLatitude,
@@ -58,22 +74,23 @@ server <- function(input, output, session) {
                        stroke = FALSE,
                        color = "#4B1C57",
                        fillOpacity = 0.7,
-                       group = "cassowary") |> 
+                       group = "cassowary") |>
       addLayersControl(baseGroups = c("Positron", "Toner", "Terrain"),
                        options = layersControlOptions(collapsed = FALSE))
 
   })
-  
+
+  # Colour palette
   plant_pal <- colorFactor(topo.colors(15), fruit$species)
-  
+
   observe({
     selected_species <- input$plant_select
-    
-    selected_plants <- fruit |> 
+
+    selected_plants <- fruit |>
       filter(species %in% selected_species)
-    
-    leafletProxy("map") |> 
-      clearGroup("plants") |> 
+
+    leafletProxy("map") |>
+      clearGroup("plants") |>
       addCircleMarkers(data = selected_plants,
                        lng = ~decimalLongitude,
                        lat = ~decimalLatitude,
@@ -86,3 +103,51 @@ server <- function(input, output, session) {
 }
 
 shinyApp(ui, server)
+
+# library(shiny)
+# 
+# # Define a list of colors and corresponding labels
+# color_data <- list(
+#   "Red" = "#FF5733",
+#   "Green" = "#33FF57",
+#   "Blue" = "#3366FF",
+#   "Yellow" = "#FFFF33",
+#   "Orange" = "#FFA500",
+#   "Purple" = "#800080",
+#   "Pink" = "#FF69B4",
+#   "Cyan" = "#00FFFF",
+#   "Magenta" = "#FF00FF",
+#   "Lime" = "#00FF00",
+#   "Teal" = "#008080",
+#   "Brown" = "#A52A2A",
+#   "Maroon" = "#800000",
+#   "Navy" = "#000080",
+#   "Gray" = "#808080"  # Add more hex color codes as needed
+# )
+# 
+# ui <- fluidPage(
+#   titlePanel("FontAwesome Circles in Checkbox Group"),
+#   sidebarLayout(
+#     sidebarPanel(
+#       div(fa_html_dependency(),
+#       uiOutput("color_labels")  # Dynamic UI for colored circle labels
+#     )),
+#     mainPanel(
+#       # Place the output here
+#     )
+#   )
+# )
+# 
+# server <- function(input, output) {
+#   output$color_labels <- renderUI({
+#     # Generate the HTML for the checkbox labels with FontAwesome circles
+#     labels <- lapply(names(color_data), function(color) {
+#       circle_html <- sprintf("<i class='fa fa-circle' style='color: %s; margin-right: 5px;'></i>", color_data[[color]])
+#       checkbox_label <- paste0(circle_html, color)
+#       checkboxInput(paste0("color_", color), HTML(checkbox_label), value = FALSE)
+#     })
+#     tagList(labels)  # Return a list of checkbox labels
+#   })
+# }
+# 
+# shinyApp(ui, server)
