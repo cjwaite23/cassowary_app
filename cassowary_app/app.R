@@ -1,5 +1,6 @@
 
 library(shiny)
+library(shinyWidgets)
 library(fontawesome)
 library(leaflet)
 library(tidyverse)
@@ -28,6 +29,7 @@ checkbox_names <- map(
 
 # Define UI
 ui <- fluidPage(
+  setBackgroundImage(src = "cassowary.jpg"),
   ## custom CSS for 3 column layout (used below for mechanics filter options)
   tags$head(
     tags$style(HTML("
@@ -151,3 +153,5 @@ shinyApp(ui, server)
 # }
 # 
 # shinyApp(ui, server)
+
+
