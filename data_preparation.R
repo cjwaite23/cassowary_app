@@ -63,8 +63,9 @@ cassowary_data <- cassowary |>
   mutate(eventDate = if_else(dataResourceName == "iNaturalist Australia",
                              with_tz(eventDate, "Australia/Brisbane"),
                              force_tz(eventDate, "Australia/Brisbane"))) |>
+  mutate(vernacularName = "Southern Cassowary") |>
   select(decimalLatitude, decimalLongitude, eventDate, species, vernacularName, recordID, dataResourceName)
-write_csv(cassowary_data, file = "cassowaries.csv")
+write_csv(cassowary_data, file = "cassowary_app/cassowaries.csv")
 
 ##### Fruit data #####
 fruit_species <- c(
@@ -189,3 +190,14 @@ plant_species <- tibble(
   mutate(checkbox_label = paste0(sprintf("<i class='fa fa-circle' style='color: %s; margin-right: 5px;'></i>", colour),
                                  vernacularName, " (<i>",species, "</i>)</span><br>"))
 write_csv(plant_species, file = "cassowary_app/plant_species.csv")
+
+cassowary_species <- tibble(
+  species = "Casuarius casuarius",
+  vernacularName = "Southern Cassowary") |>
+  mutate(combined_names = paste(species, " (", vernacularName, ")", sep = ""),
+         colour = "#712285",
+         link = NA) |>
+  mutate(checkbox_label = paste0(sprintf("<i class='fa fa-circle' style='color: %s; margin-right: 5px;'></i>", colour),
+                                 vernacularName, " (<i>",species, "</i>)</span><br>"))
+write_csv(cassowary_species, file = "cassowary_app/cassowary_species.csv")
+
