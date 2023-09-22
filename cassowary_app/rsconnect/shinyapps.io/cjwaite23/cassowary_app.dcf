@@ -5,7 +5,7 @@ account: cjwaite23
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 9923952
-bundleId: 7709810
+bundleId: 7713412
 url: https://cjwaite23.shinyapps.io/cassowary_app/
 version: 1
 asMultiple: FALSE

@@ -1,4 +1,5 @@
 
+library(readr)
 library(shiny)
 library(shinyWidgets)
 library(fontawesome)
@@ -9,9 +10,9 @@ library(shinyjs)
 library(shinythemes)
 
 # data
-cassowary <- read_csv("../data/cassowaries.csv", show_col_types = FALSE)
-fruit <- read_csv("../data/fruit.csv", show_col_types = FALSE)
-plant_species <- read_csv("../data/plant_species.csv", show_col_types = FALSE)
+cassowary <- read_csv("cassowaries.csv", show_col_types = FALSE)
+fruit <- read_csv("fruit.csv", show_col_types = FALSE)
+plant_species <- read_csv("plant_species.csv", show_col_types = FALSE)
 
 # checkbox names
 checkbox_names <- map(
@@ -31,35 +32,45 @@ checkbox_names <- map(
 
 # Define UI
 ui <- bootstrapPage(
-  navbarPage(title = div(
+  navbarPage(
+    title = div(
     img(src = "circle.png", height = "30px"), "World Cassowary Day 2023"),
     theme = shinytheme("slate"),
     windowTitle = "World Cassowary Day 2023",
-  tabPanel("Map",
-           leafletOutput("map", width="100%"),
-           absolutePanel(id = "selections", 
-                         class = "panel panel-default",
-                         top = 80, 
-                         right = 25, 
-                         width = 300, 
-                         fixed=TRUE,
-                         draggable = TRUE, 
-                         height = "auto",
-                         checkboxGroupInput("plant_select", "Plants:",
-                                            choiceNames = plant_species$combined_names,
-                                            choiceValues = plant_species$species))),
-  tabPanel("About",
-           tags$p("Cassowaries play an important ecological role in dispersing 
-                  seeds through rainforest, especially in areas where tropical 
-                  rainforest patches are fragmented."),
-           tags$p("This Shiny app uses data from the"),
-           tags$a(href = "https://www.ala.org.au", "Atlas of Living Australia"),
-           tags$p("to map occurrences of the Southern Cassowary (Casuarius casuarius) 
-                  in Queensland, as well as records of fifteen plant species 
-                  known to be dispersed by cassowaries. (add link to paper here, 
-                  could probably expand on text a bit more too, and fix formatting)")))
+    tabPanel(
+      "Map",
+      fluidRow(
+        column(
+          width = 10,
+          leafletOutput("map", width="100%", height = 800)
+        ),
+        column(
+          width = 2,
+          div(
+            fa_html_dependency(),
+            checkboxGroupInput(
+              "plant_select",
+              "Plants:",
+              width = "100%",
+              choiceNames = map(.x = plant_species$checkbox_label, .f = HTML),
+              choiceValues = plant_species$species)
+          )
+        )
+      )
+    ),
+    tabPanel("About",
+             tags$p("Cassowaries play an important ecological role in dispersing 
+                    seeds through rainforest, especially in areas where tropical 
+                    rainforest patches are fragmented."),
+             tags$p("This Shiny app uses data from the"),
+             tags$a(href = "https://www.ala.org.au", "Atlas of Living Australia"),
+             tags$p("to map occurrences of the Southern Cassowary (Casuarius casuarius) 
+                    in Queensland, as well as records of fifteen plant species 
+                    known to be dispersed by cassowaries. (add link to paper here, 
+                    could probably expand on text a bit more too, and fix formatting)")
     )
-
+  )
+)
 
 # ui <- fluidPage(
 #   fluidPage(theme = shinytheme("slate"),
@@ -149,7 +160,7 @@ server <- function(input, output, session) {
                          "<br/>", 
                          "<i>", selected_plants$species, "</i>",
                          "<br/>",
-                         "<img src='", selected_plants$species, ".jpg' width='100' />"))
+                         "<img src='", selected_plants$species, "_photo.jpg' width='100' />"))
   
   })
 }

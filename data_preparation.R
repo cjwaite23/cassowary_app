@@ -64,25 +64,44 @@ cassowary_data <- cassowary |>
                              with_tz(eventDate, "Australia/Brisbane"),
                              force_tz(eventDate, "Australia/Brisbane"))) |>
   select(decimalLatitude, decimalLongitude, eventDate, species, vernacularName, recordID, dataResourceName)
-write_csv(cassowary_data, file = "data/cassowaries.csv")
+write_csv(cassowary_data, file = "cassowaries.csv")
 
 ##### Fruit data #####
 fruit_species <- c(
-  "Beilschmiedia oligandra",
-  "Beilschmiedia volckii",
+  "Barringtonia calyptrata",
   "Calophyllum costatum",
   "Castanospora alphandii",
   "Cerbera floribunda",
   "Corynocarpus cribbianus",
   "Cryptocarya oblata",
   "Cryptocarya pleurosperma",
-  "Elaeocarpus stellaris",
+  "Elaeocarpus bancroftii",
   "Endiandra montana",
-  "Endiandra sankeyana",
   "Faradaya splendida",
   "Monoon michaelii",
+  "Prunus turneriana",
   "Syzygium cormiflorum",
-  "Syzygium divaricatum")
+  "Syzygium divaricatum",
+  "Syzygium kuranda"
+)
+
+fruit_vernacularNames <- c(
+  "Cassowary Pine",
+  "Red Touriga",
+  "Brown Tamarind",
+  "Cassowary Plum",
+  "Cribwood",
+  "Bolly Silkwood",
+  "Poison Laurel",
+  "Quandong",
+  "Brown Walnut",
+  "Glory Vine",
+  "Canary Beech",
+  "Almondbark",
+  "Watergum",
+  "Cassowary Satinash",
+  "Cherry Penda"
+)
 
 fruit <- galah_call() |>
   galah_identify(fruit_species) |>
@@ -112,44 +131,29 @@ fruit_data <- fruit |>
   mutate(eventDate = if_else(dataResourceName == "iNaturalist Australia",
                              with_tz(eventDate, "Australia/Brisbane"),
                              force_tz(eventDate, "Australia/Brisbane"))) |>
-  select(decimalLatitude, decimalLongitude, eventDate, species, vernacularName, recordID, dataResourceName)
-write_csv(fruit_data, file = "data/fruit.csv")
+  select(decimalLatitude, decimalLongitude, eventDate, species, recordID, dataResourceName) |>
+  # replace verncular names with our correct ones
+  left_join(tibble(species = fruit_species, vernacularName = fruit_vernacularNames),
+            by = "species")
+write_csv(fruit_data, file = "cassowary_app/fruit.csv")
 
 ##### Fruit Name data + links #####
-fruit_vernacularNames <- c(
-  "Dogwood",
-  "Blush Walnut",
-  "Red Touriga",
-  "Brown Tamarind",
-  "Cassowary Plum",
-  "Cribwood",
-  "Bolly Silkwood",
-  "Poison Laurel",
-  "Quandong",
-  "Brown Walnut",
-  "Sankey's Walnut",
-  "Glory Vine",
-  "Canary Beech",
-  "Watergum",
-  "Cassowary Satinash"
-)
-
 fruit_links <- c(
-  "https://apps.lucidcentral.org/rainforest/text/entities/beilschmiedia_oligandra.htm",
-  "https://apps.lucidcentral.org/rainforest/text/entities/beilschmiedia_volckii.htm",
+  "https://apps.lucidcentral.org/rainforest/text/entities/barringtonia_calyptrata.htm",
   "https://apps.lucidcentral.org/rainforest/text/entities/calophyllum_costatum.htm",
   "https://apps.lucidcentral.org/rainforest/text/entities/castanospora_alphandii.htm",
   "https://apps.lucidcentral.org/rainforest/text/entities/cerbera_floribunda.htm",
   "https://apps.lucidcentral.org/rainforest/text/entities/corynocarpus_cribbianus.htm",
   "https://apps.lucidcentral.org/rainforest/text/entities/cryptocarya_oblata.htm",
   "https://apps.lucidcentral.org/rainforest/text/entities/cryptocarya_pleurosperma.htm",
-  "https://apps.lucidcentral.org/rainforest/text/entities/elaeocarpus_stellaris.htm",
+  "https://apps.lucidcentral.org/rainforest/text/entities/elaeocarpus_bancroftii.htm",
   "https://apps.lucidcentral.org/rainforest/text/entities/endiandra_montana.htm",
-  "https://apps.lucidcentral.org/rainforest/text/entities/endiandra_sankeyana.htm",
   "https://apps.lucidcentral.org/rainforest/text/entities/oxera_splendida.htm",
   "https://apps.lucidcentral.org/rainforest/text/entities/monoon_michaelii.htm",
+  "https://apps.lucidcentral.org/rainforest/text/entities/prunus_turneriana.htm",
   "https://apps.lucidcentral.org/rainforest/text/entities/syzygium_cormiflorum.htm",
-  "https://apps.lucidcentral.org/rainforest/text/entities/syzygium_divaricatum.htm"
+  "https://apps.lucidcentral.org/rainforest/text/entities/syzygium_divaricatum.htm",
+  "https://apps.lucidcentral.org/rainforest/text/entities/syzygium_kuranda.htm"
 )
 
 colours <- c(
@@ -179,7 +183,9 @@ plant_species <- tibble(
          colour = colours) |>
   #mutate(checkbox_label = paste0("<div style='display:flex'><i class='fas fa-circle' style='color:", colour,";margin-top:3px;'</i><div style='color:black;padding-left:5px;'>", combined_names, "</div></div>"))
   #mutate(checkbox_label = span(icon("circle", class = paste0("'color:", colour, ";'")), combined_names))
+  # mutate(checkbox_label = paste0(sprintf("<i class='fa fa-circle' style='color: %s; margin-right: 5px;'></i>", colour),
+  #                                "<i>",species, "</i><br>(", vernacularName, ")</span><br>",
+  #                                sprintf("<img src='%s' style='max-width: 150px; max-height: 120px;' />", paste0(species, ".jpg"))))
   mutate(checkbox_label = paste0(sprintf("<i class='fa fa-circle' style='color: %s; margin-right: 5px;'></i>", colour),
-                                 "<i>",species, "</i><br>(", vernacularName, ")</span><br>",
-                                 sprintf("<img src='%s' style='max-width: 150px; max-height: 120px;' />", paste0(species, ".jpg"))))
-write_csv(plant_species, file = "data/plant_species.csv")
+                                 vernacularName, " (<i>",species, "</i>)</span><br>"))
+write_csv(plant_species, file = "cassowary_app/plant_species.csv")
