@@ -35,11 +35,11 @@ ui <- bootstrapPage(
           tags$p(
             HTML("Cassowaries play a key ecological role in dispersing large seeds 
              through tropical rainforests, especially in areas where rainforest 
-             patches are fragmented. In Far-North Queensland, the distributions 
-             of ALA occurrences for the Southern Cassowary (<i>Casuarius 
-             casuarius</i>) overlap closely with 15 large seeded and fruited 
-             tropical rainforest plants known to be part of the Cassowary's 
-             diet.")
+             patches are fragmented. In Far North Queensland, there is a geographic 
+             overlap between occurrence records of the Southern Cassowary 
+             (<i>Casuarius casuarius</i>) and 15 species of tropical 
+             rainforest plants that produce large seeds and fruits, 
+             which are recognized as part of the cassowary's diet.")
           )
         )
       ),
