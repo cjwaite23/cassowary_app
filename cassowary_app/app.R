@@ -23,7 +23,7 @@ ui <- bootstrapPage(
   theme = shinytheme("darkly"),
   navbarPage(
     title = div(
-      img(src = "logo_ala.png", height = "40px"),
+      #img(src = "logo_ala.png", height = "40px"),
       img(src = "circle.png", height = "40px"), 
       "World Cassowary Day 2023"),
     windowTitle = "World Cassowary Day 2023",
@@ -48,6 +48,11 @@ ui <- bootstrapPage(
           width = 9,
           leafletOutput("map", width="100%", height = "65vh")
         ),
+        
+        absolutePanel(id = "logo", class = "card", bottom = 20, left = 20, 
+                      width = 80, fixed=TRUE, draggable = FALSE, height = "auto",
+                      tags$a(href='https://www.ala.org.au', 
+                             tags$img(src='ala_logo_white.png',height='40',width='80'))),
         column(
           width = 3,
           div(
