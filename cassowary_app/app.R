@@ -25,7 +25,7 @@ ui <- bootstrapPage(
   tags$head(tags$style(HTML("th {font-size:16px}"))),
   navbarPage(
     title = div(
-      img(src = "logo_ala.png", height = "40px"),
+      #img(src = "logo_ala.png", height = "40px"),
       img(src = "circle.png", height = "40px"), 
       "World Cassowary Day 2023"),
     windowTitle = "World Cassowary Day 2023",
@@ -37,11 +37,11 @@ ui <- bootstrapPage(
           tags$p(
             HTML("Cassowaries play a key ecological role in dispersing large seeds 
              through tropical rainforests, especially in areas where rainforest 
-             patches are fragmented. In Far-North Queensland, the distributions 
-             of ALA occurrences for the Southern Cassowary (<i>Casuarius 
-             casuarius</i>) overlap closely with 15 large seeded and fruited 
-             tropical rainforest plants known to be part of the Cassowary's 
-             diet.")
+             patches are fragmented. In Far North Queensland, there is a geographic 
+             overlap between occurrence records of the Southern Cassowary 
+             (<i>Casuarius casuarius</i>) and 15 species of tropical 
+             rainforest plants that produce large seeds and fruits, 
+             which are recognized as part of the cassowary's diet.")
           )
         )
       ),
@@ -50,6 +50,11 @@ ui <- bootstrapPage(
           width = 9,
           leafletOutput("map", width="100%", height = "65vh")
         ),
+        
+        absolutePanel(id = "logo", class = "card", bottom = 20, left = 20, 
+                      width = 80, fixed=TRUE, draggable = FALSE, height = "auto",
+                      tags$a(href='https://www.ala.org.au', 
+                             tags$img(src='ala_logo_white.png',height='40',width='80'))),
         column(
           width = 3,
           div(
