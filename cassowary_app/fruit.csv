@@ -330,12 +330,12 @@ decimalLatitude,decimalLongitude,eventDate,species,recordID,dataResourceName,ver
 -17.666667,145.833333,1971-11-02T13:00:00Z,Monoon michaelii,8db6ae0d-8ea1-44ca-9ac2-1429aee75b2e,Centre for Australian National Biodiversity Research (CANB) AVH data,Canary Beech
 -17.666667,145.833333,1971-11-02T13:00:00Z,Monoon michaelii,e61e5878-a5ed-4f16-9742-1834e20ba882,Australian Tropical Herbarium (CNS) AVH data,Canary Beech
 -17.666667,145.933333,1959-08-06T14:00:00Z,Syzygium cormiflorum,2ac072fc-3c0c-401a-83b3-c505706d0c0a,Australian Tropical Herbarium (CNS) AVH data,Watergum
--17.666667,145.833333,1971-11-02T13:00:00Z,Monoon michaelii,19ccdfb7-dfd9-41cc-9e98-ce602a11ef17,Australian Tropical Herbarium (CNS) AVH data,Canary Beech
+-17.666667,145.833333,1971-11-01T13:00:00Z,Monoon michaelii,ae9891e6-39fb-4159-ba50-3cd9032ebac0,Australian Tropical Herbarium (CNS) AVH data,Canary Beech
 -17.666667,145.666667,1971-04-28T14:00:00Z,Syzygium cormiflorum,9ded53f2-a905-46e0-8ff5-fc56db8f05c8,Australian Tropical Herbarium (CNS) AVH data,Watergum
 -17.666667,145.833333,1971-11-01T13:00:00Z,Cryptocarya pleurosperma,71bf537a-a33c-4ea7-b76f-8c1cdccbe46d,Centre for Australian National Biodiversity Research (CANB) AVH data,Poison Laurel
 -17.666667,145.516667,1995-06-10T14:00:00Z,Castanospora alphandii,95a2688e-6a71-4e5f-9c1b-f70d2fe56693,Australian Tropical Herbarium (CNS) AVH data,Brown Tamarind
 -17.666667,145.666667,1971-07-14T14:00:00Z,Syzygium cormiflorum,e1adc708-656a-4205-9a62-5f5f4213ccbe,Australian Tropical Herbarium (CNS) AVH data,Watergum
--17.666667,145.833333,1971-11-01T13:00:00Z,Monoon michaelii,ae9891e6-39fb-4159-ba50-3cd9032ebac0,Australian Tropical Herbarium (CNS) AVH data,Canary Beech
+-17.666667,145.833333,1971-11-02T13:00:00Z,Monoon michaelii,19ccdfb7-dfd9-41cc-9e98-ce602a11ef17,Australian Tropical Herbarium (CNS) AVH data,Canary Beech
 -17.666667,145.75,1971-11-02T13:00:00Z,Monoon michaelii,26b323a3-bf9f-4463-ab59-ee44643b40b6,Centre for Australian National Biodiversity Research (CANB) AVH data,Canary Beech
 -17.666667,145.833333,1971-11-02T13:00:00Z,Monoon michaelii,62f028ca-2fe7-48bd-9280-683fe2f49394,Australian Tropical Herbarium (CNS) AVH data,Canary Beech
 -17.666667,145.5,1972-09-17T14:00:00Z,Endiandra montana,b3d7f145-d9db-4661-aa8e-871e1359e189,Australian Tropical Herbarium (CNS) AVH data,Brown Walnut
@@ -1154,14 +1154,14 @@ decimalLatitude,decimalLongitude,eventDate,species,recordID,dataResourceName,ver
 -17.366667,145.816667,1955-05-15T14:00:00Z,Calophyllum costatum,8b5e3fe5-c90f-4e7f-a18c-62b0124cfbfc,Australian Tropical Herbarium (CNS) AVH data,Red Touriga
 -17.366667,145.766667,1980-12-17T14:00:00Z,Corynocarpus cribbianus,6847e43f-89f2-4d86-8b51-f2d2e4020f28,Australian Tropical Herbarium (CNS) AVH data,Cribwood
 -17.366667,145.583333,1976-11-30T14:00:00Z,Syzygium kuranda,0229f5c0-68a5-4cc1-ab0e-581f5473860e,Australian Tropical Herbarium (CNS) AVH data,Cherry Penda
--17.366667,145.583333,1978-01-08T14:00:00Z,Castanospora alphandii,5367fec3-3c5e-4933-a7d0-0ed74af7f7e1,Australian Tropical Herbarium (CNS) AVH data,Brown Tamarind
+-17.366667,145.75,2001-11-27T14:00:00Z,Syzygium kuranda,64928488-b32c-43d5-a3c7-e7032fcad9f5,Australian Tropical Herbarium (CNS) AVH data,Cherry Penda
 -17.366667,145.733333,1978-09-13T14:00:00Z,Corynocarpus cribbianus,46952ae0-8843-4381-9ada-bfbdf76d9a59,Australian Tropical Herbarium (CNS) AVH data,Cribwood
 -17.366667,145.766667,1979-06-11T14:00:00Z,Calophyllum costatum,73c8c6bd-70e9-4729-875b-0297c6941f7c,Australian Tropical Herbarium (CNS) AVH data,Red Touriga
--17.366667,145.583333,1976-11-30T14:00:00Z,Syzygium kuranda,4d8b6f45-8270-4c52-ba3e-fa3621dc8e4b,Australian Tropical Herbarium (CNS) AVH data,Cherry Penda
--17.366667,145.4,1966-04-11T14:00:00Z,Cryptocarya oblata,b6698975-17de-4269-be9a-9609b6cc752d,Australian Tropical Herbarium (CNS) AVH data,Bolly Silkwood
--17.366667,145.75,2001-11-27T14:00:00Z,Syzygium kuranda,64928488-b32c-43d5-a3c7-e7032fcad9f5,Australian Tropical Herbarium (CNS) AVH data,Cherry Penda
--17.366667,145.733333,1977-06-19T14:00:00Z,Cryptocarya oblata,a06e1556-194a-449a-9642-9fd817969d81,Australian Tropical Herbarium (CNS) AVH data,Bolly Silkwood
 -17.366667,145.75,1987-11-11T14:00:00Z,Corynocarpus cribbianus,0112e812-c304-4895-9547-1283187fa0a3,Australian Tropical Herbarium (CNS) AVH data,Cribwood
+-17.366667,145.4,1966-04-11T14:00:00Z,Cryptocarya oblata,b6698975-17de-4269-be9a-9609b6cc752d,Australian Tropical Herbarium (CNS) AVH data,Bolly Silkwood
+-17.366667,145.583333,1978-01-08T14:00:00Z,Castanospora alphandii,5367fec3-3c5e-4933-a7d0-0ed74af7f7e1,Australian Tropical Herbarium (CNS) AVH data,Brown Tamarind
+-17.366667,145.733333,1977-06-19T14:00:00Z,Cryptocarya oblata,a06e1556-194a-449a-9642-9fd817969d81,Australian Tropical Herbarium (CNS) AVH data,Bolly Silkwood
+-17.366667,145.583333,1976-11-30T14:00:00Z,Syzygium kuranda,4d8b6f45-8270-4c52-ba3e-fa3621dc8e4b,Australian Tropical Herbarium (CNS) AVH data,Cherry Penda
 -17.366667,145.733333,1982-05-05T14:00:00Z,Corynocarpus cribbianus,542aa3f3-b649-4e96-85df-aa10a5c13a90,Australian Tropical Herbarium (CNS) AVH data,Cribwood
 -17.36461,145.75173,2022-10-05T03:13:00Z,Faradaya splendida,5219c174-e1e7-49b3-bb7c-63d8c5e175ed,iNaturalist Australia,Glory Vine
 -17.3637971,145.7686149,1980-12-17T14:00:00Z,Corynocarpus cribbianus,2b78aca9-b370-48d4-97b3-05878393adcd,Northern Territory Herbarium (DNA) AVH data,Cribwood
@@ -1525,13 +1525,13 @@ decimalLatitude,decimalLongitude,eventDate,species,recordID,dataResourceName,ver
 -17.3,145.716667,1977-03-23T14:00:00Z,Castanospora alphandii,007f6492-8ddf-497b-b3f7-aedf909e862d,Australian Tropical Herbarium (CNS) AVH data,Brown Tamarind
 -17.3,145.783333,1988-04-11T14:00:00Z,Prunus turneriana,363a83cd-0b9d-4667-82f6-049d32624a64,Australian Tropical Herbarium (CNS) AVH data,Almondbark
 -17.3,145.733333,1948-03-16T14:00:00Z,Syzygium kuranda,84b8be1b-95b4-4653-b6b6-09251d13c318,Australian Tropical Herbarium (CNS) AVH data,Cherry Penda
--17.3,145.8333,1983-11-06T14:00:00Z,Syzygium cormiflorum,7cd2336e-5500-4369-861f-7b7f761469a7,National Herbarium of Victoria (MEL) AVH data,Watergum
+-17.3,145.8,1982-11-09T14:00:00Z,Cryptocarya pleurosperma,c04a84af-033e-4a29-8149-7317fe0b2e5c,Australian Tropical Herbarium (CNS) AVH data,Poison Laurel
 -17.3,145.733333,1976-06-20T14:00:00Z,Monoon michaelii,aa7fdc1e-ab0a-47cb-ad1a-e01f97601dfb,Australian Tropical Herbarium (CNS) AVH data,Canary Beech
 -17.3,145.783333,1988-01-27T14:00:00Z,Cryptocarya pleurosperma,543026d2-ad68-4779-a986-c518c7a5676a,Australian Tropical Herbarium (CNS) AVH data,Poison Laurel
 -17.3,145.8,1980-07-21T14:00:00Z,Endiandra montana,cfac02ff-6e4d-418f-afc7-f3603a7b8db2,Australian Tropical Herbarium (CNS) AVH data,Brown Walnut
 -17.3,145.783333,1988-04-11T14:00:00Z,Prunus turneriana,d9e3d696-e3c5-4b83-96e0-b2ff4256fa5a,Australian Tropical Herbarium (CNS) AVH data,Almondbark
 -17.3,145.8333,1983-11-06T14:00:00Z,Syzygium cormiflorum,135d9ca8-fb3f-40f6-8fe7-8202c419c64f,National Herbarium of Victoria (MEL) AVH data,Watergum
--17.3,145.8,1982-11-09T14:00:00Z,Cryptocarya pleurosperma,c04a84af-033e-4a29-8149-7317fe0b2e5c,Australian Tropical Herbarium (CNS) AVH data,Poison Laurel
+-17.3,145.8333,1983-11-06T14:00:00Z,Syzygium cormiflorum,7cd2336e-5500-4369-861f-7b7f761469a7,National Herbarium of Victoria (MEL) AVH data,Watergum
 -17.3,145.783333,1988-04-11T14:00:00Z,Prunus turneriana,85408259-378a-40cc-916d-d5d7070a3a3e,Australian Tropical Herbarium (CNS) AVH data,Almondbark
 -17.3,145.733333,1948-08-25T14:00:00Z,Cryptocarya pleurosperma,107a82f7-dc61-4356-b915-3aaebb1a4c9a,Australian Tropical Herbarium (CNS) AVH data,Poison Laurel
 -17.3,145.783333,1988-01-27T14:00:00Z,Cryptocarya pleurosperma,c4910fc6-8e18-48e1-9439-e2f68ae4c815,Australian Tropical Herbarium (CNS) AVH data,Poison Laurel
@@ -2073,7 +2073,7 @@ decimalLatitude,decimalLongitude,eventDate,species,recordID,dataResourceName,ver
 -17,145.583333,1972-04-05T14:00:00Z,Elaeocarpus bancroftii,8bba705d-9f3c-49ae-b1c1-1de2c33860e9,Australian Tropical Herbarium (CNS) AVH data,Quandong
 -17,145.833333,1972-08-07T14:00:00Z,Syzygium cormiflorum,31854087-67f5-4d69-84d9-b401fa0c0af4,Australian Tropical Herbarium (CNS) AVH data,Watergum
 -17,145.833333,1974-05-08T14:00:00Z,Syzygium cormiflorum,fc7904c6-6e66-4d1e-b2e7-711a0dce2907,Australian Tropical Herbarium (CNS) AVH data,Watergum
--17,145.833333,1988-10-19T14:00:00Z,Elaeocarpus bancroftii,adc5b733-48bb-431e-b3e5-d917d16256dc,Australian Tropical Herbarium (CNS) AVH data,Quandong
+-17,145.833333,1974-05-08T14:00:00Z,Syzygium cormiflorum,986d1702-668e-4637-a369-87844ea43bd9,Australian Tropical Herbarium (CNS) AVH data,Watergum
 -17,145.833333,1981-08-04T14:00:00Z,Cryptocarya pleurosperma,9c64c720-181a-478c-be64-38f601660995,Australian Tropical Herbarium (CNS) AVH data,Poison Laurel
 -17,145.583333,1972-04-05T14:00:00Z,Elaeocarpus bancroftii,0029873c-0ab8-4509-bc13-1daa9ac55120,Australian Tropical Herbarium (CNS) AVH data,Quandong
 -17,145.833333,1975-12-21T14:00:00Z,Elaeocarpus bancroftii,1274af91-f903-48a5-8137-3d955cae537c,Australian Tropical Herbarium (CNS) AVH data,Quandong
@@ -2081,7 +2081,7 @@ decimalLatitude,decimalLongitude,eventDate,species,recordID,dataResourceName,ver
 -17,145.816667,1982-03-09T14:00:00Z,Elaeocarpus bancroftii,0988bcd0-5aaf-48a4-95fe-1730f3c9bcc3,Australian Tropical Herbarium (CNS) AVH data,Quandong
 -17,145.833333,1976-09-20T14:00:00Z,Syzygium cormiflorum,85ab0635-0961-47c0-801a-dfb59f2eae83,Australian Tropical Herbarium (CNS) AVH data,Watergum
 -17,145.83,1981-10-28T14:00:00Z,Elaeocarpus bancroftii,dbdafe09-0f9c-4768-8085-bc92e3b06292,NSW AVH feed,Quandong
--17,145.833333,1974-05-08T14:00:00Z,Syzygium cormiflorum,986d1702-668e-4637-a369-87844ea43bd9,Australian Tropical Herbarium (CNS) AVH data,Watergum
+-17,145.833333,1988-10-19T14:00:00Z,Elaeocarpus bancroftii,adc5b733-48bb-431e-b3e5-d917d16256dc,Australian Tropical Herbarium (CNS) AVH data,Quandong
 -17,145.833333,1972-08-08T14:00:00Z,Cryptocarya pleurosperma,466e38a5-38e2-4df6-be01-18e0cbcd6aa8,Australian Tropical Herbarium (CNS) AVH data,Poison Laurel
 -17,145.833333,1972-08-06T14:00:00Z,Cryptocarya oblata,b3bc2e39-4222-4f75-9d56-214e238b5e26,Australian Tropical Herbarium (CNS) AVH data,Bolly Silkwood
 -17,145.833333,1981-10-28T14:00:00Z,Cryptocarya pleurosperma,82f38128-0fe3-4bcd-9fb5-75ecf1037015,Australian Tropical Herbarium (CNS) AVH data,Poison Laurel
@@ -2869,13 +2869,13 @@ decimalLatitude,decimalLongitude,eventDate,species,recordID,dataResourceName,ver
 -16.166667,145.416667,1980-03-27T14:00:00Z,Elaeocarpus bancroftii,f47977b5-4bbc-4cdd-836c-816c3c17b6cf,Australian Tropical Herbarium (CNS) AVH data,Quandong
 -16.166667,145.416667,1983-08-08T14:00:00Z,Cerbera floribunda,ce7b7da6-9efe-4896-85be-b0965ec36df5,Australian Tropical Herbarium (CNS) AVH data,Cassowary Plum
 -16.166667,145.416667,1975-10-13T14:00:00Z,Cerbera floribunda,4e30f8e8-814a-4b3a-a290-9ed3bda01c78,Australian Tropical Herbarium (CNS) AVH data,Cassowary Plum
--16.166667,145.366667,1929-12-17T14:00:00Z,Endiandra montana,b4affe40-a4fa-4c4f-a0fd-5b49748c00ca,Australian Tropical Herbarium (CNS) AVH data,Brown Walnut
+-16.166667,145.383333,1986-09-01T14:00:00Z,Endiandra montana,7fb1401b-e21c-4895-b09c-bac1f826fbfc,James Cook University Herbarium (JCT) AVH data,Brown Walnut
 -16.166667,145.416667,1983-08-08T14:00:00Z,Cerbera floribunda,3a7da99f-14de-4851-a129-dfe40f8611a1,Australian Tropical Herbarium (CNS) AVH data,Cassowary Plum
 -16.166667,145.416667,1978-11-07T14:00:00Z,Cerbera floribunda,13ad3890-3037-4693-9634-bf25a2816383,Australian Tropical Herbarium (CNS) AVH data,Cassowary Plum
 -16.166667,145.416667,1972-12-18T14:00:00Z,Cerbera floribunda,0fe28b97-b20c-4311-8fd3-ee4932a1333f,Australian Tropical Herbarium (CNS) AVH data,Cassowary Plum
 -16.166667,145.416667,1978-11-07T14:00:00Z,Cerbera floribunda,f7c24174-b4b1-47df-9953-2d15851d0de6,Australian Tropical Herbarium (CNS) AVH data,Cassowary Plum
 -16.166667,145.416667,1975-10-13T14:00:00Z,Cerbera floribunda,be6a721b-5ff2-4c11-891c-f04705436ca6,Australian Tropical Herbarium (CNS) AVH data,Cassowary Plum
--16.166667,145.383333,1986-09-01T14:00:00Z,Endiandra montana,7fb1401b-e21c-4895-b09c-bac1f826fbfc,James Cook University Herbarium (JCT) AVH data,Brown Walnut
+-16.166667,145.366667,1929-12-17T14:00:00Z,Endiandra montana,b4affe40-a4fa-4c4f-a0fd-5b49748c00ca,Australian Tropical Herbarium (CNS) AVH data,Brown Walnut
 -16.166667,145.416667,1983-08-08T14:00:00Z,Cerbera floribunda,bb3f71fd-5c4a-42e5-a033-6f86e16c05a9,Australian Tropical Herbarium (CNS) AVH data,Cassowary Plum
 -16.166667,145.416667,1982-02-20T14:00:00Z,Cerbera floribunda,9ffe6339-d628-404f-a39a-015796b59d7a,Australian Tropical Herbarium (CNS) AVH data,Cassowary Plum
 -16.166667,145.416667,1971-08-18T14:00:00Z,Syzygium cormiflorum,97a438c7-ba23-476e-b5b5-e67a7a4be321,James Cook University Herbarium (JCT) AVH data,Watergum

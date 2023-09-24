@@ -1,19 +1,22 @@
 
+library(bslib)
+library(DT)
+library(fontawesome)
+library(htmltools)
+library(leaflet)
 library(readr)
 library(shiny)
-library(shinyWidgets)
-library(fontawesome)
-library(leaflet)
-library(tidyverse)
-library(htmltools)
 library(shinyjs)
 library(shinythemes)
+library(shinyWidgets)
+library(tidyverse)
 
 # data
 cassowary <- read_csv("cassowaries.csv", show_col_types = FALSE)
 fruit <- read_csv("fruit.csv", show_col_types = FALSE)
 cassowary_species <- read_csv("cassowary_species.csv", show_col_types = FALSE)
 plant_species <- read_csv("plant_species.csv", show_col_types = FALSE)
+plant_table <- read_csv("plant_table.csv", show_col_types = FALSE)
 
 # Define UI
 ui <- bootstrapPage(
@@ -69,13 +72,23 @@ ui <- bootstrapPage(
         )
       )
     ),
-    tabPanel("About",
-             tags$p(HTML("This Shiny app uses data from the")),
-             tags$a(href = "https://www.ala.org.au", "Atlas of Living Australia"),
-             tags$p("to map occurrences of the Southern Cassowary (Casuarius casuarius) 
-                    in Queensland, as well as records of fifteen plant species 
-                    known to be dispersed by cassowaries. (add link to paper here, 
-                    could probably expand on text a bit more too, and fix formatting)")
+    tabPanel(
+      "About",
+      fluidRow(
+        column(
+          width = 6,
+          tags$p(HTML("This Shiny app uses data from the")),
+          tags$a(href = "https://www.ala.org.au", "Atlas of Living Australia"),
+          tags$p("to map occurrences of the Southern Cassowary (Casuarius casuarius) 
+                  in Queensland, as well as records of fifteen plant species 
+                  known to be dispersed by cassowaries. (add link to paper here, 
+                  could probably expand on text a bit more too, and fix formatting)")
+        ),
+        column(
+          width = 6,
+          dataTableOutput("plant_table")
+        )
+      )
     )
   )
 )
@@ -155,6 +168,16 @@ server <- function(input, output, session) {
     }
     
     previous_cassowary_size(nrow(selected_cassowary))
+  })
+  
+  output$plant_table <- renderDataTable({
+    datatable(plant_table, 
+              escape = FALSE, 
+              rownames = FALSE,
+              colnames = paste0('<span style="color:', "#f8f9fa",'">',colnames(plant_table),'</span>'),
+              options = list(bPaginate = FALSE, dom = "t"),
+              class = list(stripe = FALSE)) |>
+      formatStyle(columns = 1, color = "#f8f9fa")
   })
 }
 

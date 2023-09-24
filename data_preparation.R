@@ -191,6 +191,15 @@ plant_species <- tibble(
                                  vernacularName, " (<i>",species, "</i>)</span><br>"))
 write_csv(plant_species, file = "cassowary_app/plant_species.csv")
 
+# Create plant species table
+plant_table <- plant_species |>
+  mutate(vernacularName_column = vernacularName,
+         species_column = paste0("<a href = ", link, "><i>", species, "</i></a>"),
+         image = paste0("<img src='", species, "_photo.jpg' width='100'/>")) |>
+  select(vernacularName_column, species_column, image) |>
+  rename("Common Name" = "vernacularName_column", "Species" = "species_column", "Photo" = "image")
+write_csv(plant_table, file = "cassowary_app/plant_table.csv")
+
 cassowary_species <- tibble(
   species = "Casuarius casuarius",
   vernacularName = "Southern Cassowary") |>
@@ -200,4 +209,3 @@ cassowary_species <- tibble(
   mutate(checkbox_label = paste0(sprintf("<i class='fa fa-circle' style='color: %s; margin-right: 5px;'></i>", colour),
                                  vernacularName, " (<i>",species, "</i>)</span><br>"))
 write_csv(cassowary_species, file = "cassowary_app/cassowary_species.csv")
-
