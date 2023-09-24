@@ -21,6 +21,8 @@ plant_table <- read_csv("plant_table.csv", show_col_types = FALSE)
 # Define UI
 ui <- bootstrapPage(
   theme = shinytheme("darkly"),
+  tags$head(tags$style(HTML("table {background-colour: transparent}"))),
+  tags$head(tags$style(HTML("th {font-size:16px}"))),
   navbarPage(
     title = div(
       img(src = "logo_ala.png", height = "40px"),
@@ -171,13 +173,15 @@ server <- function(input, output, session) {
   })
   
   output$plant_table <- renderDataTable({
-    datatable(plant_table, 
+    datatable(plant_table,
               escape = FALSE, 
               rownames = FALSE,
-              colnames = paste0('<span style="color:', "#f8f9fa",'">',colnames(plant_table),'</span>'),
+              colnames = paste0("<span style='color:", "#f8f9fa",";'>", colnames(plant_table), "</span>"),
               options = list(bPaginate = FALSE, dom = "t"),
-              class = list(stripe = FALSE)) |>
-      formatStyle(columns = 1, color = "#f8f9fa")
+              selection = "none") |>
+      formatStyle(columns = 1, color = "#F8F9Fa") |>
+      formatStyle(columns = 1:3,
+                  borderTopColor = "#F8F9Fa")
   })
 }
 
