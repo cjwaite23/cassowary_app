@@ -18,19 +18,16 @@ cassowary_species <- read_csv("cassowary_species.csv", show_col_types = FALSE)
 plant_species <- read_csv("plant_species.csv", show_col_types = FALSE)
 plant_table <- read_csv("plant_table.csv", show_col_types = FALSE)
 
+target <- bsplus::shiny_iconlink(name = "github")
+target$attribs$href <- "https://github.com/cjwaite23/cassowary_app"
+
 # Define UI
 ui <- bootstrapPage(
-  
-  target <- bsplus::shiny_iconlink(name = "github"),
-  target$attribs$href <- "https://github.com/cjwaite23/cassowary_app",
-  
-  
   theme = shinytheme("darkly"),
   tags$head(tags$style(HTML("table {background-colour: transparent}"))),
   tags$head(tags$style(HTML("th {font-size:16px}"))),
   navbarPage(
     title = div(
-      #img(src = "logo_ala.png", height = "40px"),
       img(src = "circle.png", height = "40px"), 
       "World Cassowary Day 2023"),
     windowTitle = "World Cassowary Day 2023",
@@ -98,15 +95,13 @@ ui <- bootstrapPage(
       )
     )
   ),
-  
   tags$footer(
     tags$a(
       href = "https://www.ala.org.au", 
-      img(src = "ala_logo_white.png", height = "50px")),
+      img(src = "ala_logo_white.png", height = "60px")),
       align = "right",
       style = "padding: 30px",
     div("Created by Callum Waite and Shandiya Balasubramaniam", target)))
- 
 
 # Define server
 server <- function(input, output, session) {
