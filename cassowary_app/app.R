@@ -20,6 +20,11 @@ plant_table <- read_csv("plant_table.csv", show_col_types = FALSE)
 
 # Define UI
 ui <- bootstrapPage(
+  
+  target <- bsplus::shiny_iconlink(name = "github"),
+  target$attribs$href <- "https://github.com/cjwaite23/cassowary_app",
+  
+  
   theme = shinytheme("darkly"),
   tags$head(tags$style(HTML("table {background-colour: transparent}"))),
   tags$head(tags$style(HTML("th {font-size:16px}"))),
@@ -50,11 +55,6 @@ ui <- bootstrapPage(
           width = 9,
           leafletOutput("map", width="100%", height = "65vh")
         ),
-        
-        absolutePanel(id = "logo", class = "card", bottom = 20, left = 20, 
-                      width = 80, fixed=TRUE, draggable = FALSE, height = "auto",
-                      tags$a(href='https://www.ala.org.au', 
-                             tags$img(src='ala_logo_white.png',height='40',width='80'))),
         column(
           width = 3,
           div(
@@ -93,12 +93,20 @@ ui <- bootstrapPage(
         ),
         column(
           width = 6,
-          dataTableOutput("plant_table")
+          dataTableOutput("plant_table"),
         )
       )
     )
-  )
-)
+  ),
+  
+  tags$footer(
+    tags$a(
+      href = "https://www.ala.org.au", 
+      img(src = "ala_logo_white.png", height = "50px")),
+      align = "right",
+      style = "padding: 30px",
+    div("Created by Callum Waite and Shandiya Balasubramaniam", target)))
+ 
 
 # Define server
 server <- function(input, output, session) {
