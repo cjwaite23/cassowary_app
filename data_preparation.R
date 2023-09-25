@@ -106,7 +106,7 @@ fruit_vernacularNames <- c(
 
 fruit <- galah_call() |>
   galah_identify(fruit_species) |>
-  galah_select(group = c("basic"), species, vernacularName, year) |>
+  galah_select(group = c("basic", "media"), species, vernacularName, year) |>
   atlas_occurrences()
 
 fruit_data <- fruit |>
@@ -175,27 +175,83 @@ colours <- c(
   "#A01813"
 )
 
+media_ids <- c(
+  "e55fb839-5592-447d-920d-2dc8d1334e9e",
+  "2d7b3838-d2de-4db3-bb99-57cc69689c65",
+  "69b35b25-d17b-4612-acbb-51f1098ba4c8",
+  "975bc10f-3596-438d-a43a-f5f757e9e3c4",
+  "9defc263-f0a0-4cb0-b21b-2ce824c89331",
+  "45c500b5-2317-457e-a840-33fe98f44e7a",
+  "5999f93c-cd6d-4628-b13a-a18d68dc1b30",
+  "829acb9c-0a6f-4ed7-a965-202201267ddb",
+  "0033f7bc-c341-4ac2-9ea9-422611b9ff4e",
+  "dd03cb6b-d36d-4dab-944b-ad8c18d56927",
+  "dc894ef4-b137-4cef-8987-da0f31916c21",
+  "db0e51aa-c497-42f3-8651-ac0123dfe002",
+  "a36ed652-6f83-4cac-b8d5-dbdaf51ffbd6",
+  "c0cba215-45d2-4d59-914e-8caf28f9397e",
+  "c8ce517b-0442-4f95-852b-784541c1dd0a"
+)
+
+creators <- c(
+  "M. Fagg (Australian Plant Image Index)",
+  "Unknown (APII)",
+  "Bat Mum",
+  "Dion Maple",
+  "Unknown (APII)",
+  "Unknown (APII)",
+  "Wairambar Rainforest",
+  "Damon Tighe",
+  "M. Fagg (APII)",
+  "dhfischer",
+  "Matthew Connors",
+  "Russell Cumming",
+  "Frankaz",
+  "Russell Cumming",
+  "Paluma"
+)
+
+licenses <- c(
+  "CC BY 3.0",
+  "CC BY 3.0",
+  "CC BY NC 4.0",
+  "CC BY NC 4.0",
+  "CC BY 3.0",
+  "CC BY 3.0",
+  "CC BY NC 4.0",
+  "CC BY NC 4.0",
+  "CC BY 3.0",
+  "CC BY NC 4.0",
+  "CC BY NC 4.0",
+  "CC BY NC 4.0",
+  "CC BY NC 4.0",
+  "CC BY NC 4.0",
+  "CC BY NC 4.0"
+)
+
+##### Create plant data tibbles #####
+
 plant_species <- tibble(
   species = fruit_species,
   vernacularName = fruit_vernacularNames,
   link = fruit_links,
+  media_id = media_ids,
+  creator = creators,
+  license = licenses
 ) |>
   mutate(combined_names = paste(species, " (", vernacularName, ")", sep = ""),
          colour = colours) |>
-  #mutate(checkbox_label = paste0("<div style='display:flex'><i class='fas fa-circle' style='color:", colour,";margin-top:3px;'</i><div style='color:black;padding-left:5px;'>", combined_names, "</div></div>"))
-  #mutate(checkbox_label = span(icon("circle", class = paste0("'color:", colour, ";'")), combined_names))
-  # mutate(checkbox_label = paste0(sprintf("<i class='fa fa-circle' style='color: %s; margin-right: 5px;'></i>", colour),
-  #                                "<i>",species, "</i><br>(", vernacularName, ")</span><br>",
-  #                                sprintf("<img src='%s' style='max-width: 150px; max-height: 120px;' />", paste0(species, ".jpg"))))
   mutate(checkbox_label = paste0(sprintf("<i class='fa fa-circle' style='color: %s; margin-right: 5px;'></i>", colour),
-                                 vernacularName, " (<i>",species, "</i>)</span><br>"))
+                                 vernacularName, " (<i>",species, "</i>)</span><br>")) |>
+  mutate(attribution = paste0(vernacularName, "(<i>", fruit_species, "</i>) Photo Credit by ", creator, " ", license, "<br>"))
 write_csv(plant_species, file = "cassowary_app/plant_species.csv")
 
 # Create plant species table
 plant_table <- plant_species |>
+  mutate(image_link = paste0("https://images.ala.org.au/image/", media_ids)) |>
   mutate(vernacularName_column = vernacularName,
-         species_column = paste0("<a href = ", link, "><i>", species, "</i></a>"),
-         image = paste0("<img src='", species, "_photo.jpg' width='100'/>")) |>
+         species_column = paste0("<a href = ", link, " target='_blank'><i>", species, "</i></a>"),
+         image = paste0("<a href = ", image_link, " target='_blank'><img src='", species, "_photo.jpg' width='100'/></a>")) |>
   select(vernacularName_column, species_column, image) |>
   rename("Common Name" = "vernacularName_column", "Species" = "species_column", "Photo" = "image")
 write_csv(plant_table, file = "cassowary_app/plant_table.csv")
@@ -207,5 +263,6 @@ cassowary_species <- tibble(
          colour = "#712285",
          link = NA) |>
   mutate(checkbox_label = paste0(sprintf("<i class='fa fa-circle' style='color: %s; margin-right: 5px;'></i>", colour),
-                                 vernacularName, " (<i>",species, "</i>)</span><br>"))
+                                 vernacularName, " (<i>",species, "</i>)</span><br>")) |>
+  mutate(attribution = "Southern Cassowary (<i>Casuarius casuarius</i>) Photo Credit by Zebsphotography CC BY NC 4.0<br>")
 write_csv(cassowary_species, file = "cassowary_app/cassowary_species.csv")

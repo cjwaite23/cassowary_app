@@ -1,2 +1,2 @@
-species,vernacularName,combined_names,colour,link,checkbox_label
-Casuarius casuarius,Southern Cassowary,Casuarius casuarius (Southern Cassowary),#712285,NA,<i class='fa fa-circle' style='color: #712285; margin-right: 5px;'></i>Southern Cassowary (<i>Casuarius casuarius</i>)</span><br>
+species,vernacularName,combined_names,colour,link,checkbox_label,attribution
+Casuarius casuarius,Southern Cassowary,Casuarius casuarius (Southern Cassowary),#712285,NA,<i class='fa fa-circle' style='color: #712285; margin-right: 5px;'></i>Southern Cassowary (<i>Casuarius casuarius</i>)</span><br>,Southern Cassowary (<i>Casuarius casuarius</i>) Photo Credit by Zebsphotography CC BY NC 4.0<br>
