@@ -19,11 +19,11 @@ cassowary_species <- read_csv("cassowary_species.csv", show_col_types = FALSE)
 plant_species <- read_csv("plant_species.csv", show_col_types = FALSE)
 plant_table <- read_csv("plant_table.csv", show_col_types = FALSE)
 
+target <- bsplus::shiny_iconlink(name = "github")
+target$attribs$href <- "https://github.com/cjwaite23/cassowary_app"
+
 # Define UI
 ui <- bootstrapPage(
-  
-  target <- bsplus::shiny_iconlink(name = "github"),
-  target$attribs$href <- "https://github.com/cjwaite23/cassowary_app",
   theme = shinytheme("slate"),
   # theme = bs_theme_update(bs_theme(preset = "slate"),
   #                         bg = "#272B30",
@@ -32,10 +32,14 @@ ui <- bootstrapPage(
   tags$head(tags$style(HTML("a {color: #7FFFD4"))), # hyperlink colour
   tags$head(tags$style(HTML("table {background-colour: transparent}"))),
   tags$head(tags$style(HTML("th {font-size:16px}"))),
+  tags$head(tags$style(HTML(".navbar {
+        height: 80px; 
+        }
+        "))),
   navbarPage(
     title = div(
       #img(src = "logo_ala.png", height = "40px"),
-      img(src = "circle.png", height = "40px"), 
+      img(src = "circle_cass.png", height = "40px"), 
       "World Cassowary Day 2023"),
     windowTitle = "World Cassowary Day 2023",
     tabPanel(
@@ -50,7 +54,8 @@ ui <- bootstrapPage(
              overlap between occurrence records of the Southern Cassowary 
              (<i>Casuarius casuarius</i>) and 15 species of tropical 
              rainforest plants that produce large seeds and fruits, 
-             which are recognized as part of the cassowary's diet.")
+             which are recognized as part of the cassowary's diet."),
+            style = "font-size:1.2em"
           )
         )
       ),
@@ -116,8 +121,8 @@ ui <- bootstrapPage(
     tags$a(
       href = "https://www.ala.org.au", 
       img(src = "ala_logo_white.png", height = "50px")),
-      align = "right",
-      style = "padding: 30px",
+      align = "left",
+      style = "padding: 20px",
     div("Created by Callum Waite and Shandiya Balasubramaniam", target)))
  
 
