@@ -103,7 +103,7 @@ ui <- bootstrapPage(
         column(width = 8,
                align = "centre",
                tags$p(
-                 HTML("This Shiny app uses data from the <a href = 'https://www.ala.org.au'>
+                 HTML("This Shiny app uses data from the <a href = 'https://www.ala.org.au' target='_blank'>
                       Atlas of Living Australia</a> to map occurrences of the Southern
                       Cassowary (<i>Casuarius casuarius</i>) in Queensland, as well as
                       records of fifteen large-seeded plant species known to be dispersed
@@ -150,7 +150,7 @@ ui <- bootstrapPage(
       href = "https://www.ala.org.au",
       img(src = "ala_logo_white.png", height = "50px")),
       align = "left",
-      style = "padding: 20px",
+      style = " target:_blank; padding: 20px",
     div("Created by Callum Waite and Shandiya Balasubramaniam", target)))
 
 
