@@ -28,7 +28,7 @@ ui <- bootstrapPage(
   tags$head(tags$style(HTML("th {font-size:16px}"))),
   navbarPage(
     title = div(
-      img(src = "circle.png", height = "40px"), 
+      img(src = "circle_cass.png", height = "40px"), 
       "World Cassowary Day 2023"),
     windowTitle = "World Cassowary Day 2023",
     tabPanel(
@@ -43,7 +43,8 @@ ui <- bootstrapPage(
              overlap between occurrence records of the Southern Cassowary 
              (<i>Casuarius casuarius</i>) and 15 species of tropical 
              rainforest plants that produce large seeds and fruits, 
-             which are recognized as part of the cassowary's diet.")
+             which are recognized as part of the cassowary's diet."), 
+            style = "font-size:1.2em"
           )
         )
       ),
@@ -98,9 +99,9 @@ ui <- bootstrapPage(
   tags$footer(
     tags$a(
       href = "https://www.ala.org.au", 
-      img(src = "ala_logo_white.png", height = "60px")),
-      align = "right",
-      style = "padding: 30px",
+      img(src = "ala_logo_white.png", height = "50px")),
+      align = "left",
+      style = "padding: 20px",
     div("Created by Callum Waite and Shandiya Balasubramaniam", target)))
 
 # Define server
