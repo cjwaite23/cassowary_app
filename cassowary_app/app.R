@@ -73,7 +73,7 @@ ui <- bootstrapPage(
                                   "Each coloured point on the map represents an ALA occurrence for the corresponding species on to the legend. You can click on individual points on the map to see the common name, species name and image of that particular species. Toggle the species shown on the map by clicking on the checkboxes or names on the legend."
                                 )),
                                 placement = "bottom",
-                                trigger = "hover click"),
+                                trigger = "hover"),
                               div(
                                 fa_html_dependency(),
                                 checkboxGroupInput(
