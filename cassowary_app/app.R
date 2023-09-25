@@ -1,4 +1,5 @@
 
+library(bsplus)
 library(bslib)
 library(DT)
 library(fontawesome)
@@ -23,9 +24,12 @@ ui <- bootstrapPage(
   
   target <- bsplus::shiny_iconlink(name = "github"),
   target$attribs$href <- "https://github.com/cjwaite23/cassowary_app",
-  
-  
-  theme = shinytheme("darkly"),
+  theme = shinytheme("slate"),
+  # theme = bs_theme_update(bs_theme(preset = "slate"),
+  #                         bg = "#272B30",
+  #                         fg = "#F8F9Fa",
+  #                         "link-color" = "#7FFFD4"),
+  tags$head(tags$style(HTML("a {color: #7FFFD4"))),
   tags$head(tags$style(HTML("table {background-colour: transparent}"))),
   tags$head(tags$style(HTML("th {font-size:16px}"))),
   navbarPage(
@@ -84,13 +88,22 @@ ui <- bootstrapPage(
       fluidRow(
         column(
           width = 6,
-          tags$p(HTML("This Shiny app uses data from the")),
-          tags$a(href = "https://www.ala.org.au", "Atlas of Living Australia"),
-          tags$p("to map occurrences of the Southern Cassowary (Casuarius casuarius) 
-                  in Queensland, as well as records of fifteen plant species 
-                  known to be dispersed by cassowaries. (add link to paper here, 
-                  could probably expand on text a bit more too, and fix formatting)")
-        ),
+          tags$p(HTML(
+            "This Shiny app uses data from the <a href = 'https://www.ala.org.au'> 
+            Atlas of Living Australia</a> to map occurrences of the Southern 
+            Cassowary (<i>Casuarius casuarius</i>) in Queensland, as well as 
+            records of fifteen large-seeded plant species known to be dispersed 
+            by cassowaries.")),
+          tags$p(HTML(
+            "As the largest frugivore (fruit-eater) in Australian tropical 
+            rainforests, cassowaries are key contributors to seed dispersal, 
+            especially of large fruited and seeded plant species. Consuming 
+            large quantities of seeds, they can perform long-distance dispersal 
+            of these species at a magnitude greater than any other rainforest 
+            frugivores. It is estimated that cassowaries potentially consume and 
+            disperse more than 1500 plant species in Australian rainforests 
+            alone."
+          ))),
         column(
           width = 6,
           dataTableOutput("plant_table"),
