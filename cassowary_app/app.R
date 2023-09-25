@@ -119,7 +119,7 @@ ui <- bootstrapPage(
                       alone."),
                  style = "font-size:1.2em; margin-left: 20px; padding: 10px"),
                tags$p(
-                 HTML('“<i>the long-distance dispersal service provided by cassowaries in
+                 HTML('“<i>...the long-distance dispersal service provided by cassowaries in
                       these areas undoubtedly contributes to the increase or maintenance
                       of species richness, forest regeneration, and gene flow across the
                       landscape</i>”<br>   – Bradford, Dennis & Westcott (2008)'),
@@ -128,13 +128,13 @@ ui <- bootstrapPage(
                tags$p(
                  HTML("<br>
                       <b>References</b><br>
-                      Bradford, M. G., Dennis, A. J., & Westcott, D. A. (2008). Diet and dietary preferences of the southern cassowary (<i>Casuarius casuarius</i>) in North Queensland, Australia. <i>Biotropica</i>, 40(3), 338-343.<br>
-                      Campbell, M. A., Lawton, T., Udyawer, V., Bell‐Anderson, K. S., Westcott, D., & Campbell, H. A. (2023). The southern cassowary (<i>Casuarius casuarius johnsoni</i>) remains an important disperser of native plants in fragmented rainforest landscapes. <i>Austral Ecology</i>, 48(4), 787-802.<br>
-                      Stocker, G. C., & Irvine, A. K. (1983). Seed dispersal by cassowaries (<i>Casuarius casuarius</i>) in North Queensland's rainforests. <i>Biotropica</i>, 170-176.<br>"),
+                      Bradford, M. G., Dennis, A. J., & Westcott, D. A. (2008). Diet and dietary preferences of the southern cassowary (<i>Casuarius casuarius</i>) in North Queensland, Australia. <i>Biotropica</i>, 40(3), 338-343. <a href = https://doi.org/10.1111/j.1744-7429.2007.00372.x target='_blank'>DOI:10.1111/j.1744-7429.2007.00372.x</a><br>
+                      Campbell, M. A., Lawton, T., Udyawer, V., Bell‐Anderson, K. S., Westcott, D., & Campbell, H. A. (2023). The southern cassowary (<i>Casuarius casuarius johnsoni</i>) remains an important disperser of native plants in fragmented rainforest landscapes. <i>Austral Ecology</i>, 48(4), 787-802. <a href = https://doi.org/10.1111/aec.13309 target='_blank'>DOI:10.1111/aec.13309</a><br>
+                      Stocker, G. C., & Irvine, A. K. (1983). Seed dispersal by cassowaries (<i>Casuarius casuarius</i>) in North Queensland's rainforests. <i>Biotropica</i>, 170-176. <a href = https://doi.org/10.2307/2387825 target='_blank'>DOI:10.2307/2387825</a>"),
                  style = "margin-left: 20px; padding: 10px"),
                tags$p(
                  HTML(
-                   paste0("<br><b>Image Attributions</b><br>",
+                   paste0("<b>Image Attributions</b>",
                           "<br>Southern Cassowary (<i>Casuarius casuarius</i>) Photo Credit by samsmith7 CC BY NC 4.0<br>",
                           paste0(c(cassowary_species$attribution, plant_species$attribution), collapse = ""))),
                style = "margin-left: 20px; padding: 10px")
