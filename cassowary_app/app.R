@@ -30,9 +30,10 @@ ui <- bootstrapPage(
   tags$head(tags$style(HTML("th {font-size:16px}"))),
   tags$head(tags$style(HTML(".navbar {height: 80px;}"))),
   tags$style(HTML(".custom-tabset {margin-left: 50px;}")),
+  tags$style(HTML(".tooltip-inner {font-size: 15px;}")),
   titlePanel(
     windowTitle = "World Cassowary Day 2023",
-    div(img(src = "circle_cass.png", width=120, style = "padding: 10px; margin-left: 20px;"), 
+    div(img(src = "circle_cass.png", width=120, style = "padding: 10px; margin-left: 20px;"),
         HTML("World Cassowary Day 2023"),
     style = "font-size:1.2em")),
   tabsetPanel(
@@ -50,17 +51,28 @@ ui <- bootstrapPage(
                              which are recognized as part of the cassowary's diet."),
                         style = "font-size:1.2em; margin-left: 20px; padding: 10px"))),
              fluidRow(
-               column(width = 9, 
+               useShinyjs(),
+               column(width = 9,
                       leafletOutput("map", width="100%", height = "65vh")),
                        column(width = 3,
                               div(
+                                fa_html_dependency(),
                                 tags$span(
                                   tags$i(
-                                    class = "fas fa-info-circle",
-                                    style = "color:#BA93C3;",
-                                    title = HTML(paste0(
-                                      "Each coloured point on the map represents an ALA occurrence for the corresponding species on to the legend. You can click on individual points on the map to see the common name, species name and image of that particular species. Toggle the species shown on the map by clicking on the checkboxes or names on the legend."
-                                    ))))),
+                                    id = "info-circle",
+                                    class = "fas fa-info-circle fa-2x",
+                                    style = "color:#BA93C3;"
+                                  )
+                                ),
+                                style = "padding: 10px"
+                              ),
+                              bsTooltip(
+                                id = "info-circle",
+                                title = HTML(paste0(
+                                  "Each coloured point on the map represents an ALA occurrence for the corresponding species on to the legend. You can click on individual points on the map to see the common name, species name and image of that particular species. Toggle the species shown on the map by clicking on the checkboxes or names on the legend."
+                                )),
+                                placement = "bottom",
+                                trigger = "hover click"),
                               div(
                                 fa_html_dependency(),
                                 checkboxGroupInput(
@@ -79,7 +91,7 @@ ui <- bootstrapPage(
                                   width = "100%",
                                   choiceNames = map(.x = plant_species$checkbox_label, .f = HTML),
                                   choiceValues = plant_species$species),
-                                style = "padding: 10px")
+                                style = "padding: 10px"),
                        )
              )
     ),
@@ -91,25 +103,25 @@ ui <- bootstrapPage(
                align = "centre",
                tags$p(
                  HTML("This Shiny app uses data from the <a href = 'https://www.ala.org.au'>
-                      Atlas of Living Australia</a> to map occurrences of the Southern 
-                      Cassowary (<i>Casuarius casuarius</i>) in Queensland, as well as 
-                      records of fifteen large-seeded plant species known to be dispersed 
+                      Atlas of Living Australia</a> to map occurrences of the Southern
+                      Cassowary (<i>Casuarius casuarius</i>) in Queensland, as well as
+                      records of fifteen large-seeded plant species known to be dispersed
                       by cassowaries."),
                  style = "font-size:1.2em; margin-left: 20px; padding: 10px"),
                tags$p(
-                 HTML("As the largest frugivore (fruit-eater) in Australian tropical 
-                      rainforests, cassowaries are key contributors to seed dispersal, 
-                      especially of large fruited and seeded plant species. Consuming 
-                      large quantities of seeds, they can perform long-distance dispersal 
-                      of these species at a magnitude greater than any other rainforest 
-                      frugivores. It is estimated that cassowaries potentially consume and 
-                      disperse more than 1500 plant species in Australian rainforests 
+                 HTML("As the largest frugivore (fruit-eater) in Australian tropical
+                      rainforests, cassowaries are key contributors to seed dispersal,
+                      especially of large fruited and seeded plant species. Consuming
+                      large quantities of seeds, they can perform long-distance dispersal
+                      of these species at a magnitude greater than any other rainforest
+                      frugivores. It is estimated that cassowaries potentially consume and
+                      disperse more than 1500 plant species in Australian rainforests
                       alone."),
                  style = "font-size:1.2em; margin-left: 20px; padding: 10px"),
                tags$p(
-                 HTML('“<i>the long-distance dispersal service provided by cassowaries in 
-                      these areas undoubtedly contributes to the increase or maintenance 
-                      of species richness, forest regeneration, and gene flow across the 
+                 HTML('“<i>the long-distance dispersal service provided by cassowaries in
+                      these areas undoubtedly contributes to the increase or maintenance
+                      of species richness, forest regeneration, and gene flow across the
                       landscape</i>”<br>   – Bradford, Dennis & Westcott (2008)'),
                  style = "font-size:1.2em; margin-left: 20px; padding: 10px"),
                dataTableOutput("plant_table"),
@@ -123,7 +135,7 @@ ui <- bootstrapPage(
                tags$p(
                  HTML(
                    paste0("<br><b>Image Attributions</b><br>",
-                          "<br>Southern Cassowary (<i>Casuarius casuarius</i>) Photo Credit by David Clode Unsplash License<br>",
+                          "<br>Southern Cassowary (<i>Casuarius casuarius</i>) Photo Credit by samsmith7 CC BY NC 4.0<br>",
                           paste0(c(cassowary_species$attribution, plant_species$attribution), collapse = ""))),
                style = "margin-left: 20px; padding: 10px")
         ),
@@ -131,15 +143,15 @@ ui <- bootstrapPage(
       )
     )
   ),
-  
+
   tags$footer(
     tags$a(
-      href = "https://www.ala.org.au", 
+      href = "https://www.ala.org.au",
       img(src = "ala_logo_white.png", height = "50px")),
       align = "left",
       style = "padding: 20px",
     div("Created by Callum Waite and Shandiya Balasubramaniam", target)))
- 
+
 
 # Define server
 server <- function(input, output, session) {
@@ -158,22 +170,22 @@ server <- function(input, output, session) {
                        fillOpacity = 0.8,
                        group = "cassowaries",
                        popup = paste0(
-                         cassowary$vernacularName, 
-                         "<br/>", 
+                         cassowary$vernacularName,
+                         "<br/>",
                          "<i>", cassowary$species, "</i>",
                          "<br/>",
                          "<img src='", cassowary$species, "_photo.jpg' width='100' />"))
   })
-  
+
   # Colour palette
   plant_pal <- plant_species$colour |> setNames(plant_species$species)
-  
+
   previous_cassowary_size <- reactiveVal(nrow(cassowary))
-  
+
   observe({
     selected_cassowary <- cassowary |>
       filter(species %in% input$cassowary_select)
-    
+
     selected_plants <- fruit |>
       filter(species %in% input$plant_select)
 
@@ -189,8 +201,8 @@ server <- function(input, output, session) {
                          fillOpacity = 0.8,
                          group = "plants",
                          popup = paste0(
-                           selected_plants$vernacularName, 
-                           "<br/>", 
+                           selected_plants$vernacularName,
+                           "<br/>",
                            "<i>", selected_plants$species, "</i>",
                            "<br/>",
                            "<img src='", selected_plants$species, "_photo.jpg' width='100' />"))
@@ -208,19 +220,19 @@ server <- function(input, output, session) {
                          fillOpacity = 0.8,
                          group = "cassowaries",
                          popup = paste0(
-                           selected_cassowary$vernacularName, 
-                           "<br/>", 
+                           selected_cassowary$vernacularName,
+                           "<br/>",
                            "<i>", selected_cassowary$species, "</i>",
                            "<br/>",
                            "<img src='", selected_cassowary$species, "_photo.jpg' width='100' />"))
     }
-    
+
     previous_cassowary_size(nrow(selected_cassowary))
   })
-  
+
   output$plant_table <- renderDataTable({
     datatable(plant_table,
-              escape = FALSE, 
+              escape = FALSE,
               rownames = FALSE,
               colnames = paste0("<span style='color:", "#f8f9fa",";'>", colnames(plant_table), "</span>"),
               options = list(bPaginate = FALSE, dom = "t"),
