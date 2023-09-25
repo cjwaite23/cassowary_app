@@ -26,9 +26,13 @@ ui <- bootstrapPage(
   theme = shinytheme("slate"),
   tags$head(tags$style(HTML("table {background-colour: transparent}"))),
   tags$head(tags$style(HTML("th {font-size:16px}"))),
+  tags$head(tags$style(HTML(".navbar {
+        height: 80px; 
+        }
+        "))),
   navbarPage(
     title = div(
-      img(src = "circle_cass.png", height = "40px"), 
+      img(src = "circle_cass.png", height = "50px"), 
       "World Cassowary Day 2023"),
     windowTitle = "World Cassowary Day 2023",
     tabPanel(
