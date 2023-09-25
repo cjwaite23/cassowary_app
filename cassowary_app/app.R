@@ -23,7 +23,7 @@ target$attribs$href <- "https://github.com/cjwaite23/cassowary_app"
 
 # Define UI
 ui <- bootstrapPage(
-  theme = shinytheme("darkly"),
+  theme = shinytheme("slate"),
   tags$head(tags$style(HTML("table {background-colour: transparent}"))),
   tags$head(tags$style(HTML("th {font-size:16px}"))),
   navbarPage(
