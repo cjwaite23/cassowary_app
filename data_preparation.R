@@ -243,7 +243,7 @@ plant_species <- tibble(
          colour = colours) |>
   mutate(checkbox_label = paste0(sprintf("<i class='fa fa-circle' style='color: %s; margin-right: 5px;'></i>", colour),
                                  vernacularName, " (<i>",species, "</i>)</span><br>")) |>
-  mutate(attribution = paste0(vernacularName, "(<i>", fruit_species, "</i>) Photo Credit by ", creator, " ", license, "<br>"))
+  mutate(attribution = paste0(vernacularName, " (<i>", fruit_species, "</i>) Photo Credit by ", creator, " ", license, "<br>"))
 write_csv(plant_species, file = "cassowary_app/plant_species.csv")
 
 # Create plant species table

@@ -19,16 +19,12 @@ cassowary_species <- read_csv("cassowary_species.csv", show_col_types = FALSE)
 plant_species <- read_csv("plant_species.csv", show_col_types = FALSE)
 plant_table <- read_csv("plant_table.csv", show_col_types = FALSE)
 
-target <- bsplus::shiny_iconlink(name = "github")
+target <- shiny_iconlink(name = "github")
 target$attribs$href <- "https://github.com/cjwaite23/cassowary_app"
 
 # Define UI
 ui <- bootstrapPage(
   theme = shinytheme("slate"),
-  # theme = bs_theme_update(bs_theme(preset = "slate"),
-  #                         bg = "#272B30",
-  #                         fg = "#F8F9Fa",
-  #                         "link-color" = "#7FFFD4"),
   tags$head(tags$style(HTML("a {color: #BA93C3"))), # hyperlink colour
   tags$head(tags$style(HTML("table {background-colour: transparent}"))),
   tags$head(tags$style(HTML("th {font-size:16px}"))),
@@ -58,6 +54,14 @@ ui <- bootstrapPage(
                       leafletOutput("map", width="100%", height = "65vh")),
                        column(width = 3,
                               div(
+                                tags$span(
+                                  tags$i(
+                                    class = "fas fa-info-circle",
+                                    style = "color:#BA93C3;",
+                                    title = HTML(paste0(
+                                      "Each coloured point on the map represents an ALA occurrence for the corresponding species on to the legend. You can click on individual points on the map to see the common name, species name and image of that particular species. Toggle the species shown on the map by clicking on the checkboxes or names on the legend."
+                                    ))))),
+                              div(
                                 fa_html_dependency(),
                                 checkboxGroupInput(
                                   "cassowary_select",
@@ -65,7 +69,8 @@ ui <- bootstrapPage(
                                   width = "100%",
                                   choiceNames = map(.x = cassowary_species$checkbox_label, .f = HTML),
                                   choiceValues = cassowary_species$species,
-                                  selected = cassowary_species$species)),
+                                  selected = cassowary_species$species),
+                                style = "padding: 10px"),
                               div(
                                 fa_html_dependency(),
                                 checkboxGroupInput(
@@ -73,7 +78,8 @@ ui <- bootstrapPage(
                                   "Plants:",
                                   width = "100%",
                                   choiceNames = map(.x = plant_species$checkbox_label, .f = HTML),
-                                  choiceValues = plant_species$species))
+                                  choiceValues = plant_species$species),
+                                style = "padding: 10px")
                        )
              )
     ),
@@ -117,7 +123,7 @@ ui <- bootstrapPage(
                tags$p(
                  HTML(
                    paste0("<br><b>Image Attributions</b><br>",
-                          "<b>Image Attributions</b><br>Southern Cassowary (<i>Casuarius casuarius</i>) Photo Credit by David Clode Unsplash License<br>",
+                          "<br>Southern Cassowary (<i>Casuarius casuarius</i>) Photo Credit by David Clode Unsplash License<br>",
                           paste0(c(cassowary_species$attribution, plant_species$attribution), collapse = ""))),
                style = "margin-left: 20px; padding: 10px")
         ),
