@@ -29,7 +29,7 @@ ui <- bootstrapPage(
   #                         bg = "#272B30",
   #                         fg = "#F8F9Fa",
   #                         "link-color" = "#7FFFD4"),
-  tags$head(tags$style(HTML("a {color: #7FFFD4"))),
+  tags$head(tags$style(HTML("a {color: #7FFFD4"))), # hyperlink colour
   tags$head(tags$style(HTML("table {background-colour: transparent}"))),
   tags$head(tags$style(HTML("th {font-size:16px}"))),
   navbarPage(
