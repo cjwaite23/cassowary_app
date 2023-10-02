@@ -55,45 +55,45 @@ ui <- bootstrapPage(
                useShinyjs(),
                column(width = 9,
                       leafletOutput("map", width="100%", height = "65vh")),
-                       column(width = 3,
-                              div(
-                                fa_html_dependency(),
-                                tags$span(
-                                  tags$i(
-                                    id = "info-circle",
-                                    class = "fas fa-info-circle fa-2x",
-                                    style = "color:#BA93C3;"
-                                  )
-                                ),
-                                style = "padding: 10px"
-                              ),
-                              bsTooltip(
-                                id = "info-circle",
-                                title = HTML(paste0(
-                                  "Each coloured point on the map represents an ALA occurrence for the corresponding species on to the legend. You can click on individual points on the map to see the common name, species name and image of that particular species. Toggle the species shown on the map by clicking on the checkboxes or names on the legend."
-                                )),
-                                placement = "bottom",
-                                trigger = "hover"),
-                              div(
-                                fa_html_dependency(),
-                                checkboxGroupInput(
-                                  "cassowary_select",
-                                  NULL,
-                                  width = "100%",
-                                  choiceNames = map(.x = cassowary_species$checkbox_label, .f = HTML),
-                                  choiceValues = cassowary_species$species,
-                                  selected = cassowary_species$species),
-                                style = "padding: 10px"),
-                              div(
-                                fa_html_dependency(),
-                                checkboxGroupInput(
-                                  "plant_select",
-                                  "Plants:",
-                                  width = "100%",
-                                  choiceNames = map(.x = plant_species$checkbox_label, .f = HTML),
-                                  choiceValues = plant_species$species),
-                                style = "padding: 10px"),
-                       )
+               column(width = 3,
+                      div(
+                        fa_html_dependency(),
+                        tags$span(
+                          tags$i(
+                            id = "info-circle",
+                            class = "fas fa-info-circle fa-2x",
+                            style = "color:#BA93C3;"
+                          )
+                        ),
+                        style = "padding: 10px"
+                      ),
+                      bsTooltip(
+                        id = "info-circle",
+                        title = HTML(paste0(
+                          "Each coloured point on the map represents an ALA occurrence for the corresponding species on to the legend. You can click on individual points on the map to see the common name, species name and image of that particular species. Toggle the species shown on the map by clicking on the checkboxes or names on the legend."
+                        )),
+                        placement = "bottom",
+                        trigger = "hover"),
+                      div(
+                        fa_html_dependency(),
+                        checkboxGroupInput(
+                          "cassowary_select",
+                          NULL,
+                          width = "100%",
+                          choiceNames = map(.x = cassowary_species$checkbox_label, .f = HTML),
+                          choiceValues = cassowary_species$species,
+                          selected = cassowary_species$species),
+                        style = "padding: 10px"),
+                      div(
+                        fa_html_dependency(),
+                        checkboxGroupInput(
+                          "plant_select",
+                          "Plants:",
+                          width = "100%",
+                          choiceNames = map(.x = plant_species$checkbox_label, .f = HTML),
+                          choiceValues = plant_species$species),
+                        style = "padding: 10px"),
+               )
              )
     ),
     tabPanel(
